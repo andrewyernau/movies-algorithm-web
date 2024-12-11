@@ -28,29 +28,29 @@ body, html {
 #content .cs-title {
     font-size: 3rem;
     font-weight: 900;
-    color: var(--bodyTextColorWhite, #fff);
+    color: white;
     margin-bottom: 1.5rem;
 }
 
 #content .cs-text {
     font-size: 1.25rem;
     line-height: 1.5em;
-    color: var(--bodyTextColorWhite, #aaa);
+    color: #aaa;
     margin-bottom: 2rem;
 }
 
 /* Botones */
 #content .cs-button-group {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;     /* Changed to row */
     align-items: center;
     justify-content: center;
-    /* 16px - 20px */
     gap: clamp(1rem, 2.3vw, 1.25rem);
 }
 #content .cs-button {
     min-width: 12.3125rem;
 }
+
 #content .cs-button-solid {
     font-size: 1rem;
     font-weight: 700;
@@ -63,7 +63,7 @@ body, html {
     padding: 0 3rem;
     background-color: var(--primary);
     overflow: hidden;
-    color: #fff;
+    color: white;
     border: none;
     display: inline-block;
     position: relative;
@@ -74,7 +74,7 @@ body, html {
     content: "";
     width: 0;
     height: 100%;
-    background: #000;
+    background: var(--primaryLight);
     opacity: 1;
     position: absolute;
     top: 0;
@@ -83,7 +83,7 @@ body, html {
     transition: width 0.3s;
 }
 #content .cs-button-solid:hover {
-    color: #fff;
+    color: white;
 }
 #content .cs-button-solid:hover:before {
     width: 100%;
@@ -96,10 +96,10 @@ body, html {
     text-decoration: none;
     font-weight: 700;
     margin: 0;
-    color: #fff;
+    color: white;
     padding: 0;
     background-color: transparent;
-    border: 1px solid var(--bodyTextColorWhite);
+    border: 1px solid white;
     box-sizing: border-box;
     display: inline-flex;
     justify-content: center;
@@ -111,7 +111,7 @@ body, html {
     content: "";
     position: absolute;
     display: block;
-    background: #000;
+    background: var(--primaryLight);
     opacity: 1;
     /* so it sits on top of the border */
     top: -1px;
@@ -130,6 +130,38 @@ body, html {
 #content .cs-button-transparent .cs-img {
     display: block;
     margin-right: 0.75rem;
+}
+
+/* Modify the existing button group styles and add media query */
+#content .cs-button-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1rem, 2.3vw, 1.25rem);
+    /* Add max-width to contain buttons */
+    max-width: 100%;
+    /* Add padding to prevent edge touching */
+    padding: 0 1rem;
+}
+
+/* Añadimos un media query para recolocar los botones en los móviles */
+@media screen and (max-width: 768px) {
+    #content .cs-button-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    #content .cs-button {
+        width: 100%;
+        max-width: 20rem;
+        min-width: auto;
+    }
+    
+    #content .cs-button-transparent {
+        width: 100%;
+        max-width: 20rem;
+    }
 }
 
 /* Canva */
