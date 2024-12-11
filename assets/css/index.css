@@ -1,74 +1,45 @@
-body{
-    background-color: #000;
+/* Cuerpo */
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    height: 100%;
+    overflow: hidden; /* Evita el scroll */
 }
+
 #content {
-    /* changes on tablet */
-    padding: 0 1rem;
-    position: relative;
-    z-index: 1;
-    /* prevents overflow from the lines extending past the screen width */
-    overflow: hidden;
-}
-#content .cs-container {
-    width: 100%;
-    max-width: 80rem;
-    /* we put the padding top and bottom on the container instead of #Hero so the pseudo element lines go to the top and bottom of the section */
-    /* 144px - 280px - leaving extra space for the navigation */
-    /* changes on tablet */
-    padding: clamp(9rem, 25.95vw, 17.5rem) 0;
-    margin: auto;
-    position: relative;
-}
-#content .cs-flex-group {
-    /* 60px - 220px */
-    margin-bottom: clamp(3.75rem, 15.5vw, 13.75rem);
-    margin: auto;
-    width: 80vw;
-    /* 464px - 562px */
-    max-width: clamp(29rem, 60vw, 35.125rem);
     display: flex;
-    align-items: flex-start;
     justify-content: center;
-    flex-wrap: wrap;
-    column-gap: 1.25rem;
-    box-sizing: border-box;
-}
-#content .cs-topper {
-    /* 13px - 16px */
-    font-size: clamp(0.8125rem, 1.6vw, 1rem);
-    line-height: 1.2em;
-    text-transform: uppercase;
+    align-items: center;
+    height: 100vh;
     text-align: center;
-    letter-spacing: 0.1rem;
-    font-weight: 700;
-    color: var(--primaryLight);
-    margin-bottom: 1rem;
-    display: block;
-}
-#content .cs-title {
-    /* 39px - 61px */
-    font-size: clamp(2.4375rem, 6.4vw, 3.8125rem);
-    font-weight: 900;
-    line-height: 1.2em;
-    text-align: center;
-    width: 100%;
-    /* 32px - 40px */
-    margin: 0 auto clamp(2rem, 4vw, 2.5rem) 0;
-    color: var(--bodyTextColorWhite);
+    overflow: hidden;
     position: relative;
 }
-#content .cs-text {
-    /* 16px - 20px */
-    font-size: clamp(1rem, 1.95vw, 1.25rem);
-    line-height: 1.5em;
-    text-align: center;
-    width: 100%;
-    /* 32px - 40px */
-    margin: 0 auto clamp(2rem, 4vw, 2.5rem) 0;
-    /* 40px - 48px */
-    margin-bottom: clamp(2.5rem, 4vw, 3rem);
-    color: var(--bodyTextColorWhite);
+/* Texto */
+#content .cs-topper {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--primaryLight, #dedede);
+    margin-bottom: 1rem;
 }
+
+#content .cs-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--bodyTextColorWhite, #fff);
+    margin-bottom: 1.5rem;
+}
+
+#content .cs-text {
+    font-size: 1.25rem;
+    line-height: 1.5em;
+    color: var(--bodyTextColorWhite, #aaa);
+    margin-bottom: 2rem;
+}
+
+/* Botones */
 #content .cs-button-group {
     display: flex;
     flex-direction: column;
@@ -83,7 +54,6 @@ body{
 #content .cs-button-solid {
     font-size: 1rem;
     font-weight: 700;
-    /* 46px - 56px */
     line-height: clamp(2.875em, 5.5vw, 3.5em);
     text-align: center;
     text-decoration: none;
@@ -120,10 +90,8 @@ body{
 }
 #content .cs-button-transparent {
     font-size: 1rem;
-    /* 46px - 56px */
     line-height: clamp(2.875rem, 5.5vw, 3.5rem);
     width: 11.25rem;
-    /* 46px - 56px */
     height: clamp(2.875rem, 5.5vw, 3.5rem);
     text-decoration: none;
     font-weight: 700;
@@ -164,21 +132,12 @@ body{
     margin-right: 0.75rem;
 }
 
-@media (min-width: 48rem) {
-    #content {
-        /* 32px - 40px */
-        padding: 0 clamp(2rem, 5vw, 2.5rem);
-    }
-    #content .cs-button-group {
-        flex-direction: row;
-    }
-}
-
+/* Canva */
 #background-canvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1; /* Detrás del contenido principal */
+    z-index: -1;
 }
