@@ -1,8 +1,7 @@
-/*-- -------------------------- -->
-<---           Hero             -->
-<--- -------------------------- -*/
-
-#hero-229 {
+body{
+    background-color: #000;
+}
+#content {
     /* changes on tablet */
     padding: 0 1rem;
     position: relative;
@@ -10,47 +9,7 @@
     /* prevents overflow from the lines extending past the screen width */
     overflow: hidden;
 }
-#hero-229 .cs-picture {
-    /* Background Image */
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -2;
-}
-#hero-229 .cs-picture:before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* ajusta la opacidad según necesites */
-    backdrop-filter: blur(6px); /* ajusta el valor de blur según necesites */
-    position: absolute;
-    display: block;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    pointer-events: none;
-}
-#hero-229 .cs-picture img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    /* Makes image act like a background-image */
-    object-fit: cover;
-}
-#hero-229 .cs-picture video {
-    position: relative;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-}
-#hero-229 .cs-container {
+#content .cs-container {
     width: 100%;
     max-width: 80rem;
     /* we put the padding top and bottom on the container instead of #Hero so the pseudo element lines go to the top and bottom of the section */
@@ -60,7 +19,7 @@
     margin: auto;
     position: relative;
 }
-#hero-229 .cs-flex-group {
+#content .cs-flex-group {
     /* 60px - 220px */
     margin-bottom: clamp(3.75rem, 15.5vw, 13.75rem);
     margin: auto;
@@ -74,7 +33,7 @@
     column-gap: 1.25rem;
     box-sizing: border-box;
 }
-#hero-229 .cs-topper {
+#content .cs-topper {
     /* 13px - 16px */
     font-size: clamp(0.8125rem, 1.6vw, 1rem);
     line-height: 1.2em;
@@ -86,7 +45,7 @@
     margin-bottom: 1rem;
     display: block;
 }
-#hero-229 .cs-title {
+#content .cs-title {
     /* 39px - 61px */
     font-size: clamp(2.4375rem, 6.4vw, 3.8125rem);
     font-weight: 900;
@@ -98,7 +57,7 @@
     color: var(--bodyTextColorWhite);
     position: relative;
 }
-#hero-229 .cs-text {
+#content .cs-text {
     /* 16px - 20px */
     font-size: clamp(1rem, 1.95vw, 1.25rem);
     line-height: 1.5em;
@@ -110,7 +69,7 @@
     margin-bottom: clamp(2.5rem, 4vw, 3rem);
     color: var(--bodyTextColorWhite);
 }
-#hero-229 .cs-button-group {
+#content .cs-button-group {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -118,10 +77,10 @@
     /* 16px - 20px */
     gap: clamp(1rem, 2.3vw, 1.25rem);
 }
-#hero-229 .cs-button {
+#content .cs-button {
     min-width: 12.3125rem;
 }
-#hero-229 .cs-button-solid {
+#content .cs-button-solid {
     font-size: 1rem;
     font-weight: 700;
     /* 46px - 56px */
@@ -141,7 +100,7 @@
     z-index: 1;
     transition: color 0.3s;
 }
-#hero-229 .cs-button-solid:before {
+#content .cs-button-solid:before {
     content: "";
     width: 0;
     height: 100%;
@@ -153,13 +112,13 @@
     z-index: -1;
     transition: width 0.3s;
 }
-#hero-229 .cs-button-solid:hover {
+#content .cs-button-solid:hover {
     color: #fff;
 }
-#hero-229 .cs-button-solid:hover:before {
+#content .cs-button-solid:hover:before {
     width: 100%;
 }
-#hero-229 .cs-button-transparent {
+#content .cs-button-transparent {
     font-size: 1rem;
     /* 46px - 56px */
     line-height: clamp(2.875rem, 5.5vw, 3.5rem);
@@ -180,7 +139,7 @@
     position: relative;
     z-index: 1;
 }
-#hero-229 .cs-button-transparent:before {
+#content .cs-button-transparent:before {
     content: "";
     position: absolute;
     display: block;
@@ -197,35 +156,29 @@
     transform: scaleX(0);
     transition: transform 0.3s;
 }
-#hero-229 .cs-button-transparent:hover:before {
+#content .cs-button-transparent:hover:before {
     transform: scaleX(1);
 }
-#hero-229 .cs-button-transparent .cs-img {
+#content .cs-button-transparent .cs-img {
     display: block;
     margin-right: 0.75rem;
 }
 
 @media (min-width: 48rem) {
-    #hero-229 {
+    #content {
         /* 32px - 40px */
         padding: 0 clamp(2rem, 5vw, 2.5rem);
     }
-    #hero-229 .cs-button-group {
+    #content .cs-button-group {
         flex-direction: row;
     }
 }
 
-@media (min-width: 81.25rem) {
-    #hero-229 {
-        background: url("https://csimg.nyc3.digitaloceanspaces.com/Hero/Background.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        /* creates parallax effect on background image */
-        background-attachment: fixed;
-        /* remove img tag so we can make parallax work */
-    }
-    #hero-229 .cs-picture img {
-        display: none;
-    }
+#background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Detrás del contenido principal */
 }
