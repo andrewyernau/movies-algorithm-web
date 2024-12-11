@@ -1,46 +1,40 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test de Recomendador</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-<body>
-    <!-- Encabezado -->
-    <header>
-        <h1>Recomendador de Películas</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="#">Recomendaciones</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Contenido principal -->
-    <main>
-        <!-- Sección de formulario -->
-        <section id="formulario">
-            <h2>Prueba el sistema de recomendaciones</h2>
-            <p>Introduce tu nombre de usuario y obtén sugerencias personalizadas.</p>
-            <form action="backend/conectar.php" method="post">
-                <label for="usuario">Nombre de Usuario:</label>
-                <input type="text" id="usuario" name="usuario" placeholder="Escribe tu nombre" required>
-                <button type="submit">Solicitar Recomendaciones</button>
-            </form>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>El recomendador</title>
+        <link rel="stylesheet" href="assets/css/core.css" />
+        <link rel="stylesheet" href="assets/css/index.css" />
+    </head>
+    <body>
+        <section id="hero-229">
+            <div class="cs-container">
+                <div class="cs-flex-group">
+                    <span class="cs-topper"> El recomendador</span>
+                    <h1 class="cs-title">Encuentra tu película</h1>
+                    <p class="cs-text">
+                        Mediante algoritmos de recomendación, te ayudamos a
+                        encontrar la película que más se ajusta a tus gustos.
+                        ¡Descubre lo que piensan otras personas y qué nota le
+                        ponen a las películas!
+                    </p>
+                    <div class="cs-button-group">
+                        <a href="" class="cs-button-solid cs-button"
+                            >¡Registrate Ya!</a
+                        >
+                        <a href="" class="cs-button-transparent cs-button">
+                            Invitado
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="cs-picture">
+                <video autoplay muted loop playsinline>
+                    <source src="assets/images/compressed.mp4" type="video/mp4" />
+                </video>
+            </div>
         </section>
-
-        <!-- Sección de resultados -->
-        <section id="resultados">
-            <h2>Resultados</h2>
-            <p>Las recomendaciones aparecerán aquí después de enviar tu solicitud.</p>
-        </section>
-    </main>
-
-    <!-- Pie de página -->
-    <footer>
-        <p>&copy; 2024 Recomendador de Películas</p>
-    </footer>
-</body>
+    </body>
 </html>
