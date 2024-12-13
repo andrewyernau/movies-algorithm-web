@@ -58,3 +58,39 @@ body {
     margin: 0;
     color: var(--bodyTextColor);
 }
+
+.cs-button-solid {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: clamp(2.875em, 5.5vw, 3.5em);
+    text-align: center;
+    text-decoration: none;
+    margin: 0;
+    /* prevents padding from adding to the width */
+    box-sizing: border-box;
+    padding: 0 3rem;
+    background-color: var(--primary);
+    overflow: hidden;
+    color: white;
+    border: none;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s;
+}
+.cs-button-solid:before {
+    content: "";
+    width: 0;
+    height: 100%;
+    background: var(--primaryLight);
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: width 0.3s;
+}
+
+.cs-button-solid:hover:before {
+    width: 100%;
+}

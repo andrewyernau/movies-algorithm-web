@@ -7,7 +7,7 @@ if (isset($_COOKIE['user_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        $pdo = new PDO('mysql:host=localhost;dbname=authdb', 'ait', 'password');
+        $pdo = new PDO('mysql:host=localhost;dbname=aitdb', 'ait', 'password');
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $username = $_POST['username'];

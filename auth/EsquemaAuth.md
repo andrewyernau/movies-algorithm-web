@@ -30,3 +30,4 @@ Notas:
 
 Sobre el hash de encriptado: https://www.php.net/manual/es/function.password-hash.php
 
+Operador de coalescencia nula: https://www.php.net/manual/es/migration70.new-features.php#migration70.new-features.null-coalesce-op
