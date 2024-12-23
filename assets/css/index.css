@@ -3,17 +3,18 @@ body, html {
     margin: 0;
     padding: 0;
     background-color: transparent;
-    height: 100%;
-    overflow: hidden; /* Evita el scroll */
+    min-height: 100%;
+    overflow-x: hidden;
+    height: auto;
 }
 
 #content {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     text-align: center;
-    overflow: hidden;
+    padding: 2rem 0;
     position: relative;
 }
 /* Texto */
@@ -144,6 +145,14 @@ body, html {
     /* Add padding to prevent edge touching */
     padding: 0 1rem;
 }
+
+#register-form-container {
+    width: 100%;
+    margin-top: 2rem; 
+    display: flex;
+    justify-content: center;
+}
+
 
 /* Añadimos un media query para recolocar los botones en los móviles */
 @media screen and (max-width: 768px) {

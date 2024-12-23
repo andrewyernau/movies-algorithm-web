@@ -1,8 +1,14 @@
 <?php
-require_once 'conectar.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    echo file_get_contents('loginform.html'); 
+    exit;
+}
+
+require_once '../includes/conectar.php';
 // login.php
 if (isset($_COOKIE['user_id'])) {
-    header('Location: main.html');
+    header('Location: ../assets/pages/main.html');
     exit;
 }
 
@@ -13,16 +19,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $username = $_POST['username'];
         // La contraseña que se envía, se guarda en $password y luego se comparará su hash
-        $password = $_POST['password'];
+        $password = sha1($_POST['password']);
 
         // Selecciono la fila entera y se guardará en el array $user 
-        $query = "SELECT * FROM users WHERE username = '$username'";
+        $query = "SELECT * FROM users WHERE name = '$username' AND passwd = '$password'";
         $result = $pdo->query($query);
         $user = $result->fetch(PDO::FETCH_ASSOC);
 
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user ) {
             setcookie('user_id', $user['id'], time() + 3600, '/');
-            header('Location: main.html');
+            header('Location: ../assets/pages/main.html');
             exit;
         } else {
             echo "Usuario o contraseña incorrectos.";

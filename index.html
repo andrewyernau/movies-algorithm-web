@@ -29,16 +29,35 @@
                         ponen a las películas!
                     </p>
                     <div class="cs-button-group">
-                        <a href="/auth/register.html" class="cs-button-solid cs-button"
-                            >¡Registrate Ya!</a
-                        >
-                        <a href="" class="cs-button-transparent cs-button">
-                            Invitado
+                        <a  class="cs-button-solid cs-button" id="register-button"
+                            >¡Registrate Ya!</a>
+                        <a class="cs-button-transparent cs-button" id="login-button">
+                            Iniciar sesión
                         </a>
                     </div>
+                    <div id="register-form-container"></div>
+                    <div id="login-form-container"></div>
                 </div>
             </div>
         </section>
         <script src="assets/js/main.js"></script> 
+        <script>
+    document.getElementById('register-button').addEventListener('click', function() {
+        fetch('/auth/register.php')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('register-form-container').innerHTML = html;
+            });
+    });
+</script>
+        <script>
+    document.getElementById('login-button').addEventListener('click', function() {
+        fetch('/auth/login.php')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('register-form-container').innerHTML = html;
+            });
+    });
+</script>
     </body>
 </html>
