@@ -1,8 +1,9 @@
 <?php
+require_once 'conectar.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        $pdo = new PDO('mysql:host=localhost;dbname=aitdb', 'ait', 'password');
-
+        $pdo = conectar();
+   
         $params = initialize_params($_POST);
 
         // Creamos una fila en la tabla.
