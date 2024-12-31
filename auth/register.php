@@ -5,9 +5,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     exit;
 }
 
-function initialize_params($post_data) {
+function initialize_params($post_data, $pdo) {
     $params = array();
-    $params[0] = mt_rand(0, 9999999);
+    $query = "SELECT MAX(id) FROM users";
+    $result = $pdo->query($query);
+    $params[0] = $result->fetchColumn() + 1;
     $params[1] = htmlspecialchars($post_data['name']);
     $params[2] = isset($post_data['edad']) ? intval($post_data['edad']) : null;
     $params[3] = htmlspecialchars($post_data['sex'] ?? '');
@@ -22,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $pdo = conectar();
    
-        $params = initialize_params($_POST);
+        $params = initialize_params($_POST, $pdo);
 
         // Creamos una fila en la tabla.
         $query = "INSERT INTO users (id, name, edad, sex, ocupacion, pic, passwd ) VALUES ($params[0], '$params[1]', $params[2], '$params[3]', '$params[4]', '$params[5]', '$params[6]')";
