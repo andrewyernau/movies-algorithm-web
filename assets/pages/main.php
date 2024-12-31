@@ -3,7 +3,8 @@ require_once('../../auth/check_session.php');
 require_once('../../includes/conectar.php');
 require_once('../../includes/apiutils.php');
 
-function quitarFecha($string) {
+function quitarFecha($string)
+{
     $patron = '/\s*\(\d{4}\)\s*/';
 
 
@@ -12,24 +13,25 @@ function quitarFecha($string) {
     return $resultado;
 }
 
-function get_image_url($movie_name){
-        $movie_name = urlencode(quitarFecha($movie_name));
-        $api_key = returnAPIfromenv('TMDB_API_KEY');
-        $url = "https://api.themoviedb.org/3/search/movie?api_key=$api_key&query=$movie_name";
-        $response = file_get_contents($url);
-        $data = json_decode($response, true);
+function get_image_url($movie_name)
+{
+    $movie_name = urlencode(quitarFecha($movie_name));
+    $api_key = returnAPIfromenv('TMDB_API_KEY');
+    $url = "https://api.themoviedb.org/3/search/movie?api_key=$api_key&query=$movie_name";
+    $response = file_get_contents($url);
+    $data = json_decode($response, true);
 
-        // Verificar si se encontraron resultados
-        if (!empty($data['results'])) {
-            $first_result = $data['results'][0];
-            $poster_path = $first_result['poster_path'];
+    // Verificar si se encontraron resultados
+    if (!empty($data['results'])) {
+        $first_result = $data['results'][0];
+        $poster_path = $first_result['poster_path'];
 
-            // Mostrar la imagen de la portada
-            if ($poster_path) {
-                $image_url = "https://image.tmdb.org/t/p/w500$poster_path";
-            }
+        // Mostrar la imagen de la portada
+        if ($poster_path) {
+            $image_url = "https://image.tmdb.org/t/p/w500$poster_path";
         }
-        return $image_url;
+    }
+    return $image_url;
 }
 
 try {
@@ -54,7 +56,7 @@ try {
 }
 
 try {
-    $pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+    $pagina_actual = isset($_GET['pagina']) ? (int) $_GET['pagina'] : 1;
 
     $peliculas_por_pagina = 30;
 
@@ -67,8 +69,7 @@ try {
 
 
 
-}
- catch (PDOException $e) {
+} catch (PDOException $e) {
     echo "Error de conexión: " . $e->getMessage();
     exit;
 }
@@ -114,24 +115,27 @@ try {
     <main>
         <h1>Welcome to IMDb Clone</h1>
 
-    <section>
-        <h2>Featured Movies</h2>
-        <div class="movie-grid">
-            <?php
-            // Recorrer el array de películas y generar las tarjetas
-            foreach ($peliculas as $pelicula) {
-                $pelicula_imagen = get_image_url($pelicula['title']);
-                echo '
-                <div class="movie-card">
-                    <img src="' . htmlspecialchars($pelicula_imagen) . '" alt="">
-                    <h3>' . htmlspecialchars($pelicula['title']) . '</h3>
-                    <p>Rating: N/A</p>
-                </div>';
-            }
-            echo "<a href='?pagina=" . ($pagina_actual + 1) . "'>Siguiente</a>";
-            ?>
-        </div>
-    </section>
+        <section>
+            <script src="../js/carousel.js"></script>
+            <h2>Featured Movies</h2>
+            <div class="carousel-container">
+                <button class="carousel-btn left-btn">❮</button>
+                <div class="carousel">
+                    <?php
+                    foreach ($peliculas as $pelicula) {
+                        $pelicula_imagen = get_image_url($pelicula['title']);
+                        echo '
+    <div class="movie-card">
+        <img data-src="' . htmlspecialchars($pelicula_imagen) . '" alt="' . htmlspecialchars($pelicula['title']) . '" class="lazy-image">
+        <h3>' . htmlspecialchars($pelicula['title']) . '</h3>
+        <p>Rating: N/A</p>
+    </div>';
+                    }
+                    ?>
+                </div>
+                <button class="carousel-btn right-btn">❯</button>
+            </div>
+        </section>
 
         <section>
             <h2>Top Rated TV Shows</h2>

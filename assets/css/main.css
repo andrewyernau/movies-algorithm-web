@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -5,25 +6,22 @@ body {
     background-color: #f4f4f4;
 }
 
+/* Header Styles */
 header {
     background-color: #121212;
     color: white;
-    padding: 10px 20px; /* Añade espacio horizontal */
+    padding: 10px 20px;
     display: flex;
-    justify-content: space-between; /* Espacia los elementos */
+    justify-content: space-between;
     align-items: center;
 }
 
 nav ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
     margin: 0;
-    display: flex; /* Alinea los elementos en fila */
-    gap: 20px; /* Espaciado uniforme entre los elementos */
-}
-
-nav ul li {
-    margin: 0;
+    display: flex;
+    gap: 20px;
 }
 
 nav ul li a {
@@ -31,24 +29,22 @@ nav ul li a {
     text-decoration: none;
     padding: 5px 15px;
     border-radius: 10px;
-    position: relative;
     transition: all 0.3s ease-in-out;
 }
 
 nav ul li a:hover {
     background-color: rgba(255, 255, 255, 0.1);
     color: #ffd700;
-    cursor: pointer;
     box-shadow: 0 0 10px 5px rgba(255, 255, 0, 0.5);
     transform: scale(1.05);
 }
 
+/* User Info */
 .user-info {
     display: flex;
     align-items: center;
     position: relative;
     cursor: pointer;
-
     padding: 5px 15px;
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
@@ -61,25 +57,20 @@ nav ul li a:hover {
     margin-right: 10px;
 }
 
-.user-info span {
-    margin-left: 10px;
-}
-
 .user-info:hover {
     background-color: rgba(255, 255, 255, 0.1);
     color: #ffd700;
-    cursor: pointer;
     box-shadow: 0 0 10px 5px rgba(255, 255, 0, 0.5);
     transform: scale(1.05);
 }
 
+/* Dropdown Menu */
 .dropdown-menu {
     display: none;
     position: absolute;
     right: 0;
     top: 100%;
     background-color: white;
-    color: black;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -102,33 +93,42 @@ nav ul li a:hover {
     display: block;
 }
 
+/* Main Content */
 main {
     max-width: 1200px;
     margin: 20px auto;
     padding: 0 20px;
 }
 
+/* Movie Grid */
 .movie-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
 }
 
+.movie-card.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .movie-card {
+    flex: 0 0 calc(25% - 20px); /* Cada tarjeta ocupa el 25% del ancho del contenedor menos el gap */
     background-color: white;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-
 .movie-card img {
-    width: 100%; /* La imagen ocupará el 100% del ancho de la tarjeta */
-    height: 300px; /* Altura fija para mantener la proporción */
-    object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
+    width: 100%;
+    height: auto;
+    object-fit: cover;
     border-radius: 5px;
 }
 
+/* Footer */
 footer {
     background-color: #121212;
     color: white;
@@ -137,4 +137,48 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+.carousel {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.left-btn {
+    left: 10px;
+}
+
+.right-btn {
+    right: 10px;
+}
+
+.carousel-btn:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+}
+
+.carousel-container:hover .carousel-btn {
+    display: block;
 }
