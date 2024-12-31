@@ -5,7 +5,7 @@ require_once('../../includes/conectar.php');
 try {
     $pdo = conectar();
     $user_id = (int) $_COOKIE['user_id'];
-    
+
     $query = "SELECT name, pic FROM users WHERE id = $user_id";
     $result = $pdo->query($query);
     $user = $result->fetch(PDO::FETCH_ASSOC);
@@ -26,6 +26,7 @@ try {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,78 +34,14 @@ try {
     <link href='https://fonts.googleapis.com/css?family=DM Sans' rel='stylesheet'>
     <style>
         body {
-            font-family: 'DM Sans';font-size: 22px;
+            font-family: 'DM Sans';
+            font-size: 22px;
         }
     </style>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #121212;
-            color: white;
-            padding: 10px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-        }
-        .user-info {
-            display: flex;
-            align-items: center;
-        }
-        .user-info img {
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-        }
-        main {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-        .movie-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-        }
-        .movie-card {
-            background-color: white;
-            border-radius: 5px;
-            padding: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .movie-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-        footer {
-            background-color: #121212;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/dropdownLogout.js"></script>
 </head>
+
 <body>
     <header>
         <nav>
@@ -119,12 +56,15 @@ try {
         <div class="user-info">
             <img src="<?php echo $userpic; ?>" alt="User Avatar">
             <span><?php echo $username; ?></span>
+            <div class="dropdown-menu">
+                <a href="../../auth/logout.php">Log out</a>
+            </div>
         </div>
     </header>
 
     <main>
         <h1>Welcome to IMDb Clone</h1>
-        
+
         <section>
             <h2>Featured Movies</h2>
             <div class="movie-grid">
@@ -171,10 +111,11 @@ try {
     <footer>
         <p>&copy; 2024 IMDb Clone. All rights reserved.</p>
         <nav>
-            <a href="#">Privacy Policy</a> | 
-            <a href="#">Terms of Service</a> | 
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Terms of Service</a> |
             <a href="#">Contact Us</a>
         </nav>
     </footer>
 </body>
+
 </html>
