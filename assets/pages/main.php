@@ -1,6 +1,36 @@
 <?php
 require_once('../../auth/check_session.php');
 require_once('../../includes/conectar.php');
+require_once('../../includes/apiutils.php');
+
+function quitarFecha($string) {
+    $patron = '/\s*\(\d{4}\)\s*/';
+
+
+    $resultado = preg_replace($patron, '', $string);
+
+    return $resultado;
+}
+
+function get_image_url($movie_name){
+        $movie_name = urlencode(quitarFecha($movie_name));
+        $api_key = returnAPIfromenv('TMDB_API_KEY');
+        $url = "https://api.themoviedb.org/3/search/movie?api_key=$api_key&query=$movie_name";
+        $response = file_get_contents($url);
+        $data = json_decode($response, true);
+
+        // Verificar si se encontraron resultados
+        if (!empty($data['results'])) {
+            $first_result = $data['results'][0];
+            $poster_path = $first_result['poster_path'];
+
+            // Mostrar la imagen de la portada
+            if ($poster_path) {
+                $image_url = "https://image.tmdb.org/t/p/w500$poster_path";
+            }
+        }
+        return $image_url;
+}
 
 try {
     $pdo = conectar();
@@ -9,7 +39,6 @@ try {
     $query = "SELECT name, pic FROM users WHERE id = $user_id";
     $result = $pdo->query($query);
     $user = $result->fetch(PDO::FETCH_ASSOC);
-
     if (!$user) {
         setcookie('user_id', '', time() - 3600, '/');
         header('Location: ../../index.html');
@@ -20,6 +49,26 @@ try {
     $userpic = !empty($user['pic']) ? htmlspecialchars($user['pic']) : '../images/userdefault.png';
 
 } catch (PDOException $e) {
+    echo "Error de conexión: " . $e->getMessage();
+    exit;
+}
+
+try {
+    $pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+
+    $peliculas_por_pagina = 30;
+
+    $offset = ($pagina_actual - 1) * $peliculas_por_pagina;
+
+    $query = "SELECT title FROM movie LIMIT $peliculas_por_pagina OFFSET $offset";
+    $result = $pdo->query($query);
+
+    $peliculas = $result->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+}
+ catch (PDOException $e) {
     echo "Error de conexión: " . $e->getMessage();
     exit;
 }
@@ -65,26 +114,24 @@ try {
     <main>
         <h1>Welcome to IMDb Clone</h1>
 
-        <section>
-            <h2>Featured Movies</h2>
-            <div class="movie-grid">
+    <section>
+        <h2>Featured Movies</h2>
+        <div class="movie-grid">
+            <?php
+            // Recorrer el array de películas y generar las tarjetas
+            foreach ($peliculas as $pelicula) {
+                $pelicula_imagen = get_image_url($pelicula['title']);
+                echo '
                 <div class="movie-card">
-                    <img src="/placeholder.svg?height=300&width=200" alt="Movie 1">
-                    <h3>Movie Title 1</h3>
-                    <p>Rating: 8.5/10</p>
-                </div>
-                <div class="movie-card">
-                    <img src="/placeholder.svg?height=300&width=200" alt="Movie 2">
-                    <h3>Movie Title 2</h3>
-                    <p>Rating: 7.9/10</p>
-                </div>
-                <div class="movie-card">
-                    <img src="/placeholder.svg?height=300&width=200" alt="Movie 3">
-                    <h3>Movie Title 3</h3>
-                    <p>Rating: 8.2/10</p>
-                </div>
-            </div>
-        </section>
+                    <img src="' . htmlspecialchars($pelicula_imagen) . '" alt="">
+                    <h3>' . htmlspecialchars($pelicula['title']) . '</h3>
+                    <p>Rating: N/A</p>
+                </div>';
+            }
+            echo "<a href='?pagina=" . ($pagina_actual + 1) . "'>Siguiente</a>";
+            ?>
+        </div>
+    </section>
 
         <section>
             <h2>Top Rated TV Shows</h2>
@@ -104,6 +151,7 @@ try {
                     <h3>TV Show Title 3</h3>
                     <p>Rating: 9.0/10</p>
                 </div>
+
             </div>
         </section>
     </main>

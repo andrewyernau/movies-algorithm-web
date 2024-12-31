@@ -121,9 +121,11 @@ main {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+
 .movie-card img {
-    width: 100%;
-    height: auto;
+    width: 100%; /* La imagen ocupará el 100% del ancho de la tarjeta */
+    height: 300px; /* Altura fija para mantener la proporción */
+    object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
     border-radius: 5px;
 }
 
