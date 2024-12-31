@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $message = '<div style="text-align: center; color: green; margin-bottom: 20px;">¡Registrado! Ahora inicia sesión</div>';
         $button = '<div style="text-align: center;"><a href="../index.html" style="text-decoration: none; color: #000; background-color: #f1f1f1; padding: 10px 20px; border-radius: 5px;">Iniciar sesión</a></div>';
-        echo $message ;
+        echo $message;
         echo $button;
         
     } catch (PDOException $e) {

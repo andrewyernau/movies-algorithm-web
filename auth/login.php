@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 require_once '../includes/conectar.php';
 // login.php
 if (isset($_COOKIE['user_id'])) {
-    header('Location: ../assets/pages/main.html');
+    header('Location: ../assets/pages/main.php');
     exit;
 }
 
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($user ) {
             setcookie('user_id', $user['id'], time() + 3600, '/');
-            header('Location: ../assets/pages/main.html');
+            header('Location: ../assets/pages/main.php');
             exit;
         } else {
             echo "Usuario o contraseña incorrectos.";

@@ -1,3 +1,29 @@
+<?php
+require_once('../../auth/check_session.php');
+require_once('../../includes/conectar.php');
+
+try {
+    $pdo = conectar();
+    $user_id = (int) $_COOKIE['user_id'];
+    
+    $query = "SELECT name, pic FROM users WHERE id = $user_id";
+    $result = $pdo->query($query);
+    $user = $result->fetch(PDO::FETCH_ASSOC);
+
+    if (!$user) {
+        setcookie('user_id', '', time() - 3600, '/');
+        header('Location: ../../index.html');
+        exit;
+    }
+
+    $username = htmlspecialchars($user['name']);
+    $userpic = !empty($user['pic']) ? htmlspecialchars($user['pic']) : '../images/userdefault.png';
+
+} catch (PDOException $e) {
+    echo "Error de conexión: " . $e->getMessage();
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +47,9 @@
             background-color: #121212;
             color: white;
             padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         nav ul {
             list-style-type: none;
@@ -33,6 +62,16 @@
         nav ul li a {
             color: white;
             text-decoration: none;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        .user-info img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
         }
         main {
             max-width: 1200px;
@@ -77,6 +116,10 @@
                 <li><a href="#">News</a></li>
             </ul>
         </nav>
+        <div class="user-info">
+            <img src="<?php echo $userpic; ?>" alt="User Avatar">
+            <span><?php echo $username; ?></span>
+        </div>
     </header>
 
     <main>

@@ -5,7 +5,7 @@ function conectar() {
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo;
     } catch (PDOException $e) {
-        die("Error: " . $e->getMessage());
+        die('Error: ' . $e->getMessage());
     }
 }
 ?>
