@@ -7,7 +7,7 @@
     const movieCards = document.querySelectorAll(".movie-card");
     const cardWidth = movieCards[0].offsetWidth;
     const gap = parseInt(getComputedStyle(carousel).gap) || 0;
-    const visibleCards = 3;
+    const visibleCards = 4;
     const scrollStep = (cardWidth + gap) * visibleCards;
     let scrollAmount = 0;
     const maxScroll = carousel.scrollWidth - carousel.clientWidth;

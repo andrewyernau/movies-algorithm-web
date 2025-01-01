@@ -3,30 +3,29 @@ require_once('../../auth/check_session.php');
 require_once('../../includes/conectar.php');
 require_once('../../includes/apiutils.php');
 
-function quitarFecha($string)
+function quitarParentesis($string)
 {
-    $patron = '/\s*\(\d{4}\)\s*/';
-
+    $patron = '/\s*\([^()]*\)\s*/';
 
     $resultado = preg_replace($patron, '', $string);
+
+    $resultado = trim($resultado);
 
     return $resultado;
 }
 
 function get_image_url($movie_name)
 {
-    $movie_name = urlencode(quitarFecha($movie_name));
+    $movie_name = urlencode(quitarParentesis($movie_name));
     $api_key = returnAPIfromenv('TMDB_API_KEY');
     $url = "https://api.themoviedb.org/3/search/movie?api_key=$api_key&query=$movie_name";
     $response = file_get_contents($url);
     $data = json_decode($response, true);
 
-    // Verificar si se encontraron resultados
     if (!empty($data['results'])) {
         $first_result = $data['results'][0];
         $poster_path = $first_result['poster_path'];
 
-        // Mostrar la imagen de la portada
         if ($poster_path) {
             $image_url = "https://image.tmdb.org/t/p/w500$poster_path";
         }
@@ -80,7 +79,8 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IMDb Clone</title>
+    <title>El Recomendador</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/ico.ico">
     <link href='https://fonts.googleapis.com/css?family=DM Sans' rel='stylesheet'>
     <style>
         body {
@@ -113,7 +113,7 @@ try {
     </header>
 
     <main>
-        <h1>Welcome to IMDb Clone</h1>
+        <h1>Bienvenidos al Recomendador de películas.</h1>
 
         <section>
             <script src="../js/carousel.js"></script>

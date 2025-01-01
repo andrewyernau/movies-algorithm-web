@@ -14,6 +14,17 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+}
+
+main {
+    max-height: none;
+    height: auto;
+    overflow: visible;
+}
+
+.container, .main-content, main {
+    overflow: visible;
 }
 
 nav ul {
@@ -34,12 +45,8 @@ nav ul li a {
 
 nav ul li a:hover {
     background-color: rgba(255, 255, 255, 0.1);
-    color: #ffd700;
-    box-shadow: 0 0 10px 5px rgba(255, 255, 0, 0.5);
-    transform: scale(1.05);
 }
 
-/* User Info */
 .user-info {
     display: flex;
     align-items: center;
@@ -59,12 +66,8 @@ nav ul li a:hover {
 
 .user-info:hover {
     background-color: rgba(255, 255, 255, 0.1);
-    color: #ffd700;
-    box-shadow: 0 0 10px 5px rgba(255, 255, 0, 0.5);
-    transform: scale(1.05);
 }
 
-/* Dropdown Menu */
 .dropdown-menu {
     display: none;
     position: absolute;
@@ -100,7 +103,6 @@ main {
     padding: 0 20px;
 }
 
-/* Movie Grid */
 .movie-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -113,7 +115,7 @@ main {
 }
 
 .movie-card {
-    flex: 0 0 calc(25% - 20px); /* Cada tarjeta ocupa el 25% del ancho del contenedor menos el gap */
+    flex: 0 0 calc(25% - 20px);
     background-color: white;
     border-radius: 5px;
     padding: 10px;
@@ -137,6 +139,7 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    position: relative;
 }
 
 .carousel {
