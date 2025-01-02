@@ -1,7 +1,6 @@
 <?php
 require_once "../../auth/check_session.php";
 require_once "../../includes/conectar.php";
-require_once "../../includes/apiutils.php";
 require_once "../../includes/common.php";
 
 try {
@@ -91,14 +90,14 @@ try {
                 <button class="carousel-btn left-btn">❮</button>
                 <div class="carousel">
                     <?php foreach ($peliculas as $pelicula) {
-                        $pelicula_imagen = get_image_url($pelicula["title"]);
+                        $movie_data = get_movie_data($pelicula["title"]);
                         echo '
     <div class="movie-card">
     <a href="pelicula.php?pelicula=' .
                             $pelicula["id"] .
                             '">
         <img data-src="' .
-                            htmlspecialchars($pelicula_imagen) .
+                            htmlspecialchars($movie_data["cover"]) .
                             '" alt="' .
                             htmlspecialchars($pelicula["title"]) .
                             '" class="lazy-image">

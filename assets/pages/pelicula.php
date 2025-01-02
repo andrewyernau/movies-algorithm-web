@@ -1,7 +1,6 @@
 <?php
 require_once "../../auth/check_session.php";
 require_once "../../includes/conectar.php";
-require_once "../../includes/apiutils.php";
 require_once "../../includes/common.php";
 
 try {
@@ -13,7 +12,7 @@ try {
     $titulo = htmlspecialchars($pelicula["title"]);
     $fecha = htmlspecialchars($pelicula["date"]);
     $descripcion = htmlspecialchars($pelicula["desc"]);
-    $imagen = quitarParentesis(get_image_url($titulo));
+    $movie_data = get_movie_data(quitarParentesis($titulo));
 } catch (PDOException $e) {
     echo "Error de conexión: " . $e->getMessage();
     exit();
@@ -32,7 +31,9 @@ try {
 <body>
     <div class="movie-container">
         <div class="movie-cover">
-            <?php echo "<img src='$imagen' alt='Cover de la Película'>"; ?>
+            <img src="<?php echo htmlspecialchars(
+                $movie_data["cover"]
+            ); ?>" alt="Cover de la Película">
             <div class="movie-rating">⭐ 8.5/10</div>
         </div>
         <div class="movie-info">
@@ -44,10 +45,15 @@ try {
                 <span class="genre">Drama</span>
             </div>
             <div class="movie-details">
-                <p><strong>Director:</strong> Nombre del Director</p>
-                <p><strong>Reparto:</strong> Actor 1, Actor 2, Actor 3</p>
-                <p><strong>Duración:</strong> 2h 15min</p>
+                <p><strong>Duración:</strong> <?php
+                $horas = floor($movie_data["runtime"] / 60);
+                $minutos = $movie_data["runtime"] % 60;
+                echo htmlspecialchars("{$horas}h {$minutos}min");
+                ?></p>
                 <p><strong>Fecha de Estreno:</strong> <?php echo $fecha; ?></p>
+                <p><strong>Reparto:</strong> <?php echo htmlspecialchars(
+                    implode(", ", $movie_data["cast"])
+                ); ?></p>
             </div>
             <a href="https://www.youtube.com/results?search_query=<?php echo urlencode(
                 $titulo . " Trailer"
