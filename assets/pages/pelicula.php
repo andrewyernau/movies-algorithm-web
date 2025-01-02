@@ -49,7 +49,11 @@ try {
                 <p><strong>Duración:</strong> 2h 15min</p>
                 <p><strong>Fecha de Estreno:</strong> <?php echo $fecha; ?></p>
             </div>
-            <button class="rounded cs-button-solid">Ver Tráiler</button>
+            <a href="https://www.youtube.com/results?search_query=<?php echo urlencode(
+                $titulo . " Trailer"
+            ); ?>">
+           <button class="rounded cs-button-solid">Ver Tráiler</button>
+            </a>
         </div>
     </div>
 </body>
