@@ -1,76 +1,45 @@
 <?php
-require_once('../../auth/check_session.php');
-require_once('../../includes/conectar.php');
-require_once('../../includes/apiutils.php');
-
-function quitarParentesis($string)
-{
-    $patron = '/\s*\([^()]*\)\s*/';
-
-    $resultado = preg_replace($patron, '', $string);
-
-    $resultado = trim($resultado);
-
-    return $resultado;
-}
-
-function get_image_url($movie_name)
-{
-    $movie_name = urlencode(quitarParentesis($movie_name));
-    $api_key = returnAPIfromenv('TMDB_API_KEY');
-    $url = "https://api.themoviedb.org/3/search/movie?api_key=$api_key&query=$movie_name";
-    $response = file_get_contents($url);
-    $data = json_decode($response, true);
-
-    if (!empty($data['results'])) {
-        $first_result = $data['results'][0];
-        $poster_path = $first_result['poster_path'];
-
-        if ($poster_path) {
-            $image_url = "https://image.tmdb.org/t/p/w500$poster_path";
-        }
-    }
-    return $image_url;
-}
+require_once "../../auth/check_session.php";
+require_once "../../includes/conectar.php";
+require_once "../../includes/apiutils.php";
+require_once "../../includes/common.php";
 
 try {
     $pdo = conectar();
-    $user_id = (int) $_COOKIE['user_id'];
+    $user_id = (int) $_COOKIE["user_id"];
 
     $query = "SELECT name, pic FROM users WHERE id = $user_id";
     $result = $pdo->query($query);
     $user = $result->fetch(PDO::FETCH_ASSOC);
     if (!$user) {
-        setcookie('user_id', '', time() - 3600, '/');
-        header('Location: ../../index.html');
-        exit;
+        setcookie("user_id", "", time() - 3600, "/");
+        header("Location: ../../index.html");
+        exit();
     }
 
-    $username = htmlspecialchars($user['name']);
-    $userpic = !empty($user['pic']) ? htmlspecialchars($user['pic']) : '../images/userdefault.png';
-
+    $username = htmlspecialchars($user["name"]);
+    $userpic = !empty($user["pic"])
+        ? htmlspecialchars($user["pic"])
+        : "../images/userdefault.png";
 } catch (PDOException $e) {
     echo "Error de conexión: " . $e->getMessage();
-    exit;
+    exit();
 }
 
 try {
-    $pagina_actual = isset($_GET['pagina']) ? (int) $_GET['pagina'] : 1;
+    $pagina_actual = isset($_GET["pagina"]) ? (int) $_GET["pagina"] : 1;
 
     $peliculas_por_pagina = 30;
 
     $offset = ($pagina_actual - 1) * $peliculas_por_pagina;
 
-    $query = "SELECT title FROM movie LIMIT $peliculas_por_pagina OFFSET $offset";
+    $query = "SELECT id, title FROM movie LIMIT $peliculas_por_pagina OFFSET $offset";
     $result = $pdo->query($query);
 
     $peliculas = $result->fetchAll(PDO::FETCH_ASSOC);
-
-
-
 } catch (PDOException $e) {
     echo "Error de conexión: " . $e->getMessage();
-    exit;
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -121,17 +90,25 @@ try {
             <div class="carousel-container">
                 <button class="carousel-btn left-btn">❮</button>
                 <div class="carousel">
-                    <?php
-                    foreach ($peliculas as $pelicula) {
-                        $pelicula_imagen = get_image_url($pelicula['title']);
+                    <?php foreach ($peliculas as $pelicula) {
+                        $pelicula_imagen = get_image_url($pelicula["title"]);
                         echo '
     <div class="movie-card">
-        <img data-src="' . htmlspecialchars($pelicula_imagen) . '" alt="' . htmlspecialchars($pelicula['title']) . '" class="lazy-image">
-        <h3>' . htmlspecialchars($pelicula['title']) . '</h3>
+    <a href="pelicula.php?pelicula=' .
+                            $pelicula["id"] .
+                            '">
+        <img data-src="' .
+                            htmlspecialchars($pelicula_imagen) .
+                            '" alt="' .
+                            htmlspecialchars($pelicula["title"]) .
+                            '" class="lazy-image">
+        <h3>' .
+                            htmlspecialchars($pelicula["title"]) .
+                            '</h3>
         <p>Rating: N/A</p>
+        </a>
     </div>';
-                    }
-                    ?>
+                    } ?>
                 </div>
                 <button class="carousel-btn right-btn">❯</button>
             </div>

@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
 }
 
 /* Header Styles */
@@ -23,7 +24,9 @@ main {
     overflow: visible;
 }
 
-.container, .main-content, main {
+.container,
+.main-content,
+main {
     overflow: visible;
 }
 
@@ -120,7 +123,9 @@ main {
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
 }
 
 .movie-card img {

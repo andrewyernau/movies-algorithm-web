@@ -94,3 +94,7 @@ body {
 .cs-button-solid:hover:before {
     width: 100%;
 }
+
+.rounded {
+    border-radius: 2rem;
+}
