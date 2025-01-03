@@ -1,0 +1,185 @@
+<?php
+require_once "../../auth/check_session.php";
+require_once "../../includes/conectar.php";
+require_once "../../includes/common.php";
+require_once "./get_movie_info.php";
+
+session_start();
+
+try {
+    $pdo = conectar();
+    $user_id = (int) $_COOKIE["user_id"];
+
+    $query = "SELECT name, pic FROM users WHERE id = $user_id";
+    $result = $pdo->query($query);
+    $user = $result->fetch(PDO::FETCH_ASSOC);
+    if (!$user) {
+        setcookie("user_id", "", time() - 3600, "/");
+        header("Location: ../../index.html");
+        exit();
+    }
+
+    $username = htmlspecialchars($user["name"]);
+    $userpic = !empty($user["pic"]) ? htmlspecialchars($user["pic"]) : "../images/userdefault.png";
+} catch (PDOException $e) {
+    echo "Error de conexión: " . $e->getMessage();
+    exit();
+}
+
+$pagina_actual = isset($_GET["pagina"]) ? (int) $_GET["pagina"] : 1;
+$genero_seleccionado = isset($_GET["genre"]) ? (int) $_GET["genre"] : null;
+
+$peliculas_por_pagina = 30;
+$offset = ($pagina_actual - 1) * $peliculas_por_pagina;
+
+$peliculas = [];
+$generos = [];
+$hay_pagina_siguiente = false;
+
+try {
+    if ($genero_seleccionado) {
+        $query_generos = "SELECT id, name FROM genre ORDER BY name ASC";
+        $result_generos = $pdo->query($query_generos);
+        $generos = $result_generos->fetchAll(PDO::FETCH_ASSOC);
+
+        $query_peliculas = "SELECT m.id, m.title
+                            FROM movie m
+                            JOIN moviegenre mg ON m.id = mg.movie_id
+                            WHERE mg.genre = $genero_seleccionado
+                            LIMIT $peliculas_por_pagina OFFSET $offset";
+        $result_peliculas = $pdo->query($query_peliculas);
+        $peliculas = $result_peliculas->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($peliculas as &$pelicula) {
+            $movie_data = get_movie_data($pelicula["title"]);
+            $pelicula["cover"] = $movie_data["cover"] ?? "../images/placeholder.jpg"; // Usamos un placeholder si no se encuentra la imagen
+        }
+
+        $query_count = "SELECT COUNT(*) as total 
+                        FROM movie m
+                        JOIN moviegenre mg ON m.id = mg.movie_id
+                        WHERE mg.genre = $genero_seleccionado";
+        $result_count = $pdo->query($query_count);
+        $total_peliculas = $result_count->fetch(PDO::FETCH_ASSOC)["total"];
+
+        $hay_pagina_siguiente = $total_peliculas > $pagina_actual * $peliculas_por_pagina;
+    }
+} catch (PDOException $e) {
+    echo "Error al cargar los datos: " . $e->getMessage();
+    exit();
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Recomendador</title>
+    <link rel="icon" type="image/x-icon" href="../images/ico.ico">
+    <link href='https://fonts.googleapis.com/css?family=DM Sans' rel='stylesheet'>
+    <style>
+        body {
+            font-family: 'DM Sans';
+            font-size: 22px;
+        }
+    </style>
+    <link rel="stylesheet" href="../css/catalog.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="main.php" style="font-weight: bold; font-size: 1.5em;">Inicio</a></li>
+                <li><a href="catalog.php">Catálogo</a></li>
+                <li><a href="#">TV Shows</a></li>
+                <li><a href="#">Celebrities</a></li>
+                <li><a href="#">News</a></li>
+            </ul>
+        </nav>
+        <div class="user-info">
+            <img src="<?php echo $userpic; ?>" alt="User Avatar">
+            <span><?php echo $username; ?></span>
+            <div class="dropdown-menu">
+                <a href="../../auth/logout.php">Log out</a>
+            </div>
+        </div>
+    </header>
+
+
+
+    <main>
+        <h1>Busca películas con nuestro catálogo.</h1>
+
+        <!-- Catálogo -->
+        <section>
+            <h2>Nuestro catálogo:</h2>
+            <div class="catalog-container">
+
+                <!-- Dropdown de Géneros -->
+                <?php if (!$genero_seleccionado): ?>
+                    <form method="GET" action="main.php">
+                        <select name="genre" onchange="this.form.submit()">
+                            Filtrar por género:
+                            <option value="">Selecciona un Género</option>
+                            <?php foreach ($generos as $genero): ?>
+                                <option value="<?php echo $genero['id']; ?>" <?php echo $genero_seleccionado == $genero['id'] ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($genero['name']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </form>
+                <?php endif; ?>
+
+                <!-- Contenedor de Películas -->
+                <div class="movies-grid">
+                    <?php if (count($peliculas) > 0): ?>
+                        <?php foreach ($peliculas as $pelicula): ?>
+                            <div class="movie-card">
+                                <a href="pelicula.php?pelicula=<?php echo $pelicula['id']; ?>">
+                                    <img src="<?php echo !empty($pelicula['cover']) ? htmlspecialchars($pelicula['cover']) : '../images/placeholder.jpg'; ?>"
+                                        alt="<?php echo htmlspecialchars($pelicula['title']); ?>" class="lazy-image">
+                                    <h3><?php echo htmlspecialchars($pelicula['title']); ?></h3>
+                                    <p>Rating: N/A</p>
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>No se encontraron películas para este género.</p>
+                    <?php endif; ?>
+                </div>
+
+                <!-- Paginación -->
+                <div class="pagination">
+                    <?php if ($pagina_actual > 1): ?>
+                        <a href="main.php?genre=<?php echo $genero_seleccionado; ?>&pagina=<?php echo $pagina_actual - 1; ?>"
+                            class="pagination-btn">Página Anterior</a>
+                    <?php endif; ?>
+                    <?php if ($hay_pagina_siguiente): ?>
+                        <a href="main.php?genre=<?php echo $genero_seleccionado; ?>&pagina=<?php echo $pagina_actual + 1; ?>"
+                            class="pagination-btn">Página Siguiente</a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </section>
+
+        <script src="../js/dropdownLogout.js"></script>
+        <script src="../js/catalog.js"></script>
+        <script src="../js/lazyload.js"></script>
+        
+    </main>
+
+    <footer>
+        <p>&copy; 2024 IMDb Clone. All rights reserved.</p>
+        <nav>
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Terms of Service</a> |
+            <a href="#">Contact Us</a>
+        </nav>
+    </footer>
+</body>
+
+</html>

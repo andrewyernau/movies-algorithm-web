@@ -1,4 +1,4 @@
-/* General */
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -7,7 +7,7 @@ body {
     background: linear-gradient(135deg, lightgray, lightblue);
 }
 
-/* Header */
+/* Header Styles */
 header {
     background-color: black;
     color: white;
@@ -15,18 +15,13 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10;
+    position: relative;
 }
 
-
 main {
-    max-width: 1200px;
-    margin: 70px auto 20px;
-    padding: 0 20px;
+    max-height: none;
+    height: auto;
+    overflow: visible;
 }
 
 .container,
@@ -196,17 +191,20 @@ footer {
     display: block;
 }
 
+
+
+
 /* Estilo para el dropdown de géneros */
 #genres-dropdown {
     display: inline-block;
     position: relative;
     align-items: center;
     padding: 8px 16px;
-    background-color: rgba(0, 0, 0, 0.1);
-    border: 1px solid black;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, border 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.1); /* Fondo más opaco */
+    border: 1px solid black; /* Línea fina alrededor */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar el cursor para indicar que es clickeable */
+    transition: background-color 0.3s ease, border 0.3s ease; /* Transiciones suaves */
 }
 
 #genres-dropdown div {
@@ -215,12 +213,12 @@ footer {
 }
 
 #genres-dropdown .arrow {
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease; /* Transición suave para el giro */
 }
 
 #genres-dropdown:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-color: #aaa;
+    background-color: rgba(0, 0, 0, 0.2); /* Fondo un poco más oscuro cuando se pasa el ratón */
+    border-color: #aaa; /* Cambiar el color del borde en hover */
 }
 
 .genre-item {
@@ -243,9 +241,9 @@ footer {
 .dropdown-menu-movies {
     display: none;
     position: absolute;
-    top: 100%;
+    top: 100%; /* Asegura que el menú aparezca justo debajo */
     left: 0;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo más opaco */
     border: 1px solid #ddd;
     padding: 10px;
     z-index: 10;
@@ -255,12 +253,14 @@ footer {
     padding: 10px;
 }
 
+/* Estilo para las películas */
 .movies-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
 }
 
+/* Estilo para la paginación */
 #pagination {
     display: flex;
     justify-content: space-between;

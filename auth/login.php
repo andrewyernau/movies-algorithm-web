@@ -1,12 +1,12 @@
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    echo file_get_contents('loginform.html'); 
+    echo file_get_contents('loginform.html');
     exit;
 }
 
 require_once '../includes/conectar.php';
-// login.php
+
 if (isset($_COOKIE['user_id'])) {
     header('Location: ../assets/pages/main.php');
     exit;
@@ -26,8 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $pdo->query($query);
         $user = $result->fetch(PDO::FETCH_ASSOC);
 
-        if ($user ) {
-            setcookie('user_id', $user['id'], time() + 3600, '/');
+        if ($user) {
+            setcookie('user_id', $user['id'], time() + 3600, '/', '', false, true);
+
             header('Location: ../assets/pages/main.php');
             exit;
         } else {

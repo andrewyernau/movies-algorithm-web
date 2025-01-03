@@ -14,13 +14,15 @@ try{
 
     if(!$user){//si el usuario no existe, lo lleva al index.html
 
-        setcookie('user_id', '', time() - 3600, '/');
+        setcookie("user_id", $user_id, time() - 3600, "/", "", false, true);
+
         header('Location: ../../index.html');
         exit;
     }
 
     //extiende la sesión a 1 hora de nuevo
-    setcookie('user_id', $user_id, time() + 3600, '/');
+    setcookie("user_id", $user_id, time() + 3600, "/", "", false, true);
+
 }
 catch(PDOException $e){
     echo $e->getMessage();

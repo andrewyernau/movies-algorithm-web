@@ -58,7 +58,6 @@ try {
         }
     </style>
     <link rel="stylesheet" href="../css/main.css">
-    <script src="../js/dropdownLogout.js"></script>
 </head>
 
 <body>
@@ -66,7 +65,7 @@ try {
         <nav>
             <ul>
                 <li><a href="#" style="font-weight: bold; font-size: 1.5em;">IMDb</a></li>
-                <li><a href="#">Movies</a></li>
+                <li><a href="./catalog.php">Catálogo</a></li>
                 <li><a href="#">TV Shows</a></li>
                 <li><a href="#">Celebrities</a></li>
                 <li><a href="#">News</a></li>
@@ -76,7 +75,7 @@ try {
             <img src="<?php echo $userpic; ?>" alt="User Avatar">
             <span><?php echo $username; ?></span>
             <div class="dropdown-menu">
-                <a href="../../auth/logout.php">Log out</a>
+                <a href="../../auth/logout.php">Cerrar sesión</a>
             </div>
         </div>
     </header>
@@ -85,8 +84,7 @@ try {
         <h1>Bienvenidos al Recomendador de películas.</h1>
 
         <section>
-            <script src="../js/carousel.js"></script>
-            <h2>Featured Movies</h2>
+            <h2>Películas destacadas:</h2>
             <div class="carousel-container">
                 <button class="carousel-btn left-btn">❮</button>
                 <div class="carousel">
@@ -94,8 +92,8 @@ try {
                         <div class="movie-card" data-movie-id="<?php echo $pelicula[
                             "id"
                         ]; ?>" data-movie-title="<?php echo htmlspecialchars(
-    $pelicula["title"]
-); ?>">
+                             $pelicula["title"]
+                         ); ?>">
                             <a href="pelicula.php?pelicula=<?php echo $pelicula[
                                 "id"
                             ]; ?>">
@@ -135,6 +133,10 @@ try {
 
             </div>
         </section>
+
+        <script src="../js/carousel.js"></script>
+        <script src="../js/lazyload.js"></script>
+        <script src="../js/dropdownLogout.js"></script>
     </main>
 
     <footer>
@@ -148,19 +150,20 @@ try {
 </body>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const movieCards = document.querySelectorAll('.movie-card');
+    document.addEventListener('DOMContentLoaded', function () {
+        const movieCards = document.querySelectorAll('.movie-card');
 
-    movieCards.forEach(card => {
-        const movieTitle = card.dataset.movieTitle;
+        movieCards.forEach(card => {
+            const movieTitle = card.dataset.movieTitle;
 
-        fetch(`get_movie_info.php?title=${encodeURIComponent(movieTitle)}`)
-            .then(response => response.json())
-            .then(data => {
-                const img = card.querySelector('img');
-                img.src = data.cover;
-            });
+            fetch(`get_movie_info.php?title=${encodeURIComponent(movieTitle)}`)
+                .then(response => response.json())
+                .then(data => {
+                    const img = card.querySelector('img');
+                    img.src = data.cover;
+                });
+        });
     });
-});
 </script>
+
 </html>
