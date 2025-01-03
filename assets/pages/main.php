@@ -33,7 +33,7 @@ try {
 
     $offset = ($pagina_actual - 1) * $peliculas_por_pagina;
 
-    $query = "SELECT id, title FROM movie LIMIT $peliculas_por_pagina OFFSET $offset";
+    $query = "SELECT id, title, date FROM movie LIMIT $peliculas_por_pagina OFFSET $offset";
     $result = $pdo->query($query);
 
     $peliculas = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -103,8 +103,10 @@ try {
                                 <h3><?php echo htmlspecialchars(
                                     $pelicula["title"]
                                 ); ?></h3>
-                                <p>Loading...</p>
                             </a>
+                            <p> <?php echo htmlspecialchars(
+                                $pelicula["date"]
+                            ); ?> </p>
                         </div>
                     <?php } ?>
                 </div>
@@ -157,7 +159,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 const img = card.querySelector('img');
                 img.src = data.cover;
-                // Actualiza otros datos si los necesitas
             });
     });
 });
