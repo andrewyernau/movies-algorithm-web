@@ -38,7 +38,7 @@ $hay_pagina_siguiente = false;
 
 if ($genero_seleccionado !== null) {
     try {
-        
+
         $query_peliculas = "SELECT m.id, m.title
                             FROM movie m
                             JOIN moviegenre mg ON m.id = mg.movie_id
@@ -48,14 +48,12 @@ if ($genero_seleccionado !== null) {
         $peliculas = $result_peliculas->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($peliculas as &$pelicula) {
-            $movie_data = get_movie_data($pelicula["title"]);
-            // debug
             echo "<!-- Getting data for: " . $pelicula['title'] . " -->";
-            $pelicula["cover"] = $movie_data["cover"] ?? "../images/placeholder.jpg";
+            $pelicula["cover"] = "../images/placeholder.jpg";
             echo "<!-- Cover assigned: " . $pelicula["cover"] . " -->";
         }
 
-        $query_count = "SELECT COUNT(DISTINCT m.id) as total 
+        $query_count = "SELECT COUNT(DISTINCT m.id) as total
                 FROM movie m
                 JOIN moviegenre mg ON m.id = mg.movie_id
                 WHERE mg.genre = $genero_seleccionado";
@@ -163,7 +161,11 @@ if ($genero_seleccionado !== null) {
                             if (!in_array($pelicula['id'], $displayed_ids)):
                                 $displayed_ids[] = $pelicula['id'];
                                 ?>
-                                <div class="movie-card">
+                                    <div class="movie-card" data-movie-id="<?php echo $pelicula[
+                                        "id"
+                                    ]; ?>" data-movie-title="<?php echo htmlspecialchars(
+                                         $pelicula["title"]
+                                     ); ?>">
                                     <a href="pelicula.php?pelicula=<?php echo $pelicula['id']; ?>">
                                         <img src="<?php echo !empty($pelicula['cover']) ? htmlspecialchars($pelicula['cover']) : '../images/placeholder.jpg'; ?>"
                                             alt="<?php echo htmlspecialchars($pelicula['title']); ?>" class="lazy-image">
@@ -195,6 +197,18 @@ if ($genero_seleccionado !== null) {
         </section>
         <script>
             document.addEventListener('DOMContentLoaded', () => {
+              const movieCards = document.querySelectorAll('.movie-card');
+
+              movieCards.forEach(card => {
+                  const movieTitle = card.dataset.movieTitle;
+
+                  fetch(`get_movie_info.php?title=${encodeURIComponent(movieTitle)}`)
+                      .then(response => response.json())
+                      .then(data => {
+                          const img = card.querySelector('img');
+                          img.src = data.cover;
+                      });
+              });
                 var dropdownButton = document.getElementById('dropdown-button');
                 var dropdownList = document.getElementById('dropdown-list');
                 var dropdownArrow = document.getElementById('dropdown-arrow');

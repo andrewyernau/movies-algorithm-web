@@ -40,24 +40,31 @@
                 </div>
             </div>
         </section>
-        <script src="assets/js/main.js"></script> 
+        <script src="assets/js/main.js"></script>
         <script>
-    document.getElementById('register-button').addEventListener('click', function() {
-        fetch('/auth/register.php')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('register-form-container').innerHTML = html;
+            document.getElementById('register-button').addEventListener('click', function() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/auth/register.php', true);
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        document.getElementById('login-form-container').innerHTML = '';
+                        document.getElementById('register-form-container').innerHTML = xhr.responseText;
+                    }
+                };
+                xhr.send();
             });
-    });
-</script>
-        <script>
-    document.getElementById('login-button').addEventListener('click', function() {
-        fetch('/auth/login.php')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('register-form-container').innerHTML = html;
+
+            document.getElementById('login-button').addEventListener('click', function() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/auth/login.php', true);
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        document.getElementById('register-form-container').innerHTML = '';
+                        document.getElementById('login-form-container').innerHTML = xhr.responseText;
+                    }
+                };
+                xhr.send();
             });
-    });
-</script>
+        </script>
     </body>
 </html>
