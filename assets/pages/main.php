@@ -57,6 +57,7 @@ try {
             font-size: 22px;
         }
     </style>
+    <link rel="stylesheet" href="../css/core.css">
     <link rel="stylesheet" href="../css/main.css">
 </head>
 
@@ -97,7 +98,7 @@ try {
                             <a href="pelicula.php?pelicula=<?php echo $pelicula[
                                 "id"
                             ]; ?>">
-                                <img src="../images/placeholder.png" alt="Loading...">
+                                <img src="../images/placeholder.jpg" alt="Loading...">
                                 <h3><?php echo htmlspecialchars(
                                     $pelicula["title"]
                                 ); ?></h3>
@@ -116,39 +117,38 @@ try {
             <h2>Top Rated TV Shows</h2>
             <div class="movie-grid">
                 <div class="movie-card">
-                    <img src="/placeholder.svg?height=300&width=200" alt="TV Show 1">
+                    <img src="../images/placeholder.jpg" alt="TV Show 1">
                     <h3>TV Show Title 1</h3>
                     <p>Rating: 9.2/10</p>
                 </div>
                 <div class="movie-card">
-                    <img src="/placeholder.svg?height=300&width=200" alt="TV Show 2">
+                    <img src="../images/placeholder.jpg" alt="TV Show 2">
                     <h3>TV Show Title 2</h3>
                     <p>Rating: 8.8/10</p>
                 </div>
                 <div class="movie-card">
-                    <img src="/placeholder.svg?height=300&width=200" alt="TV Show 3">
+                    <img src="../images/placeholder.jpg" alt="TV Show 3">
                     <h3>TV Show Title 3</h3>
                     <p>Rating: 9.0/10</p>
                 </div>
 
             </div>
         </section>
-
-        <script src="../js/carousel.js"></script>
-        <script src="../js/lazyload.js"></script>
-        <script src="../js/dropdownLogout.js"></script>
     </main>
 
     <footer>
         <p>&copy; 2024 IMDb Clone. All rights reserved.</p>
         <nav>
-            <a href="#">Privacy Policy</a> |
-            <a href="#">Terms of Service</a> |
-            <a href="#">Contact Us</a>
+            <a href="#">Política de privacidad</a> |
+            <a href="#">Términos de servicio</a> |
+            <a href="#">Contáctanos</a>
         </nav>
     </footer>
 </body>
 
+<script src="../js/carousel.js"></script>
+<script src="../js/lazyload.js"></script>
+<script src="../js/dropdownLogout.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const movieCards = document.querySelectorAll('.movie-card');

@@ -42,13 +42,15 @@ body, html {
 
 /* Botones */
 #content .cs-button-group {
+    
     display: flex;
-    flex-direction: row;     /* Changed to row */
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: clamp(1rem, 2.3vw, 1.25rem);
 }
 #content .cs-button {
+    cursor: pointer;
     min-width: 12.3125rem;
 }
 

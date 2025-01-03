@@ -86,6 +86,7 @@ try {
             font-size: 22px;
         }
     </style>
+    <link rel="stylesheet" href="../css/core.css">
     <link rel="stylesheet" href="../css/catalog.css">
 </head>
 
@@ -114,25 +115,43 @@ try {
     <main>
         <h1>Busca películas con nuestro catálogo.</h1>
 
-        <!-- Catálogo -->
         <section>
             <h2>Nuestro catálogo:</h2>
             <div class="catalog-container">
+                <form method="GET">
+                    <button type="button" id="dropdown-button">
+                        Géneros <span id="dropdown-arrow">▼</span>
+                    </button>
+                    <div id="dropdown-list" class="hidden">
+                        <div class="column">
+                            <div data-id="1">Acción</div>
+                            <div data-id="2">Aventura</div>
+                            <div data-id="3">Animación</div>
+                            <div data-id="15">Ciencia Ficción</div>
+                            <div data-id="10">Cine Negro</div>
+                            <div data-id="5">Comedia</div>
+                            <div data-id="6">Crimen</div>
+                        </div>
+                        <div class="column">
+                            <div data-id="0">Desconocido</div>
+                            <div data-id="7">Documental</div>
+                            <div data-id="8">Drama</div>
+                            <div data-id="9">Fantasía</div>
+                            <div data-id="17">Guerra</div>
+                            <div data-id="4">Infantil</div>
+                            <div data-id="13">Misterio</div>
+                        </div>
+                        <div class="column">
+                            <div data-id="12">Musical</div>
+                            <div data-id="14">Romance</div>
+                            <div data-id="16">Suspenso</div>
+                            <div data-id="11">Terror</div>
+                            <div data-id="18">Western</div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="genero_id" id="genero-input">
+                </form>
 
-                <!-- Dropdown de Géneros -->
-                <?php if (!$genero_seleccionado): ?>
-                    <form method="GET" action="main.php">
-                        <select name="genre" onchange="this.form.submit()">
-                            Filtrar por género:
-                            <option value="">Selecciona un Género</option>
-                            <?php foreach ($generos as $genero): ?>
-                                <option value="<?php echo $genero['id']; ?>" <?php echo $genero_seleccionado == $genero['id'] ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($genero['name']); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </form>
-                <?php endif; ?>
 
                 <!-- Contenedor de Películas -->
                 <div class="movies-grid">
@@ -148,7 +167,7 @@ try {
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <p>No se encontraron películas para este género.</p>
+                        <!-- <p>No se encontraron películas para este género.</p> -->
                     <?php endif; ?>
                 </div>
 
@@ -165,11 +184,6 @@ try {
                 </div>
             </div>
         </section>
-
-        <script src="../js/dropdownLogout.js"></script>
-        <script src="../js/catalog.js"></script>
-        <script src="../js/lazyload.js"></script>
-        
     </main>
 
     <footer>
@@ -180,6 +194,9 @@ try {
             <a href="#">Contact Us</a>
         </nav>
     </footer>
+    <script src="../js/dropdownLogout.js"></script>
+    <script src="../js/catalog.js"></script>
+    <script src="../js/lazyload.js"></script>
 </body>
 
 </html>

@@ -1,27 +1,10 @@
 /* General */
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: lightgray;
     background: linear-gradient(135deg, lightgray, lightblue);
 }
-
-/* Header */
-header {
-    background-color: black;
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-}
-
 
 main {
     max-width: 1200px;
@@ -33,47 +16,6 @@ main {
 .main-content,
 main {
     overflow: visible;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 20px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    padding: 5px 15px;
-    border-radius: 10px;
-    transition: all 0.3s ease-in-out;
-}
-
-nav ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-    padding: 5px 15px;
-    border-radius: 10px;
-    transition: all 0.3s ease-in-out;
-}
-
-.user-info img {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-}
-
-.user-info:hover {
-    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .dropdown-menu {
@@ -140,18 +82,6 @@ main {
     border-radius: 5px;
 }
 
-/* Footer */
-footer {
-    background-color: black;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    position: relative;
-}
-
 .carousel {
     display: flex;
     gap: 20px;
@@ -196,7 +126,14 @@ footer {
     display: block;
 }
 
-/* Estilo para el dropdown de géneros */
+
+
+
+
+
+
+
+/* Estilo para el dropdown de géneros
 #genres-dropdown {
     display: inline-block;
     position: relative;
@@ -208,26 +145,21 @@ footer {
     cursor: pointer;
     transition: background-color 0.3s ease, border 0.3s ease;
 }
-
 #genres-dropdown div {
     font-weight: bold;
     margin-right: 8px;
 }
-
 #genres-dropdown .arrow {
     transition: transform 0.3s ease;
 }
-
 #genres-dropdown:hover {
     background-color: rgba(0, 0, 0, 0.2);
     border-color: #aaa;
 }
-
 .genre-item {
     cursor: pointer;
     padding: 5px;
 }
-
 .genre-chip {
     display: inline-block;
     background-color: #f0f0f0;
@@ -235,11 +167,9 @@ footer {
     border-radius: 15px;
     margin: 2px;
 }
-
 .arrow {
     transition: transform 0.3s;
 }
-
 .dropdown-menu-movies {
     display: none;
     position: absolute;
@@ -250,23 +180,19 @@ footer {
     padding: 10px;
     z-index: 10;
 }
-
 .dropdown-columns-movies {
     padding: 10px;
 }
-
 .movies-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
 }
-
 #pagination {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
-
 .pagination-btn {
     padding: 10px;
     background-color: #333;
@@ -275,7 +201,7 @@ footer {
     border-radius: 5px;
     cursor: pointer;
 }
-
 .pagination-btn:hover {
     background-color: #555;
 }
+*/

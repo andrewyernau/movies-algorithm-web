@@ -1,20 +1,29 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const dropdownToggle = document.querySelector("#genres-dropdown > div");
-    const dropdownMenu = document.querySelector(".dropdown-menu-movies");
+document.addEventListener('DOMContentLoaded', () => {
+    const dropdownButton = document.getElementById('dropdown-button');
+    const dropdownList = document.getElementById('dropdown-list');
+    const dropdownArrow = document.getElementById('dropdown-arrow');
+    const generoInput = document.getElementById('genero-input');
 
-    if (dropdownToggle && dropdownMenu) {
-        // Abrir/cerrar el menú de géneros
-        dropdownToggle.addEventListener("click", () => {
-            const isVisible = dropdownMenu.style.display === "block";
-            dropdownMenu.style.display = isVisible ? "none" : "block";
-        });
+    dropdownButton.addEventListener('click', () => {
+        dropdownList.classList.toggle('hidden');
+        dropdownArrow.textContent = dropdownList.classList.contains('hidden') ? '▼' : '▲';
+    });
 
-        // Cerrar el menú automáticamente al seleccionar un género
-        const dropdownOptions = dropdownMenu.querySelectorAll("a");
-        dropdownOptions.forEach(option => {
-            option.addEventListener("click", () => {
-                dropdownMenu.style.display = "none";
-            });
-        });
-    }
+    dropdownList.addEventListener('click', (event) => {
+        if (event.target && event.target.matches('div[data-id]')) {
+            const genreId = event.target.getAttribute('data-id');
+            generoInput.value = genreId;
+            dropdownList.classList.add('hidden');
+            dropdownArrow.textContent = '▼';
+            document.querySelector('form').submit();
+        }
+    });
+
+    // Cerrar dropdown
+    document.addEventListener('click', (event) => {
+        if (!dropdownButton.contains(event.target) && !dropdownList.contains(event.target)) {
+            dropdownList.classList.add('hidden');
+            dropdownArrow.textContent = '▼';
+        }
+    });
 });

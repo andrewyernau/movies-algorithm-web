@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // La contraseña que se envía, se guarda en $password y luego se comparará su hash
         $password = sha1($_POST['password']);
 
-        // Selecciono la fila entera y se guardará en el array $user 
+        // Selecciono la fila entera y  se guardará en el array $user 
         $query = "SELECT * FROM users WHERE name = '$username' AND passwd = '$password'";
         $result = $pdo->query($query);
         $user = $result->fetch(PDO::FETCH_ASSOC);
