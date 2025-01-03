@@ -27,21 +27,18 @@ try {
 }
 
 $pagina_actual = isset($_GET["pagina"]) ? (int) $_GET["pagina"] : 1;
-$genero_seleccionado = isset($_GET["genre"]) ? (int) $_GET["genre"] : null;
+$genero_seleccionado = isset($_GET["genero_input"]) ? (int) $_GET["genero_input"] : null;
 
-$peliculas_por_pagina = 30;
+$peliculas_por_pagina = 31;
 $offset = ($pagina_actual - 1) * $peliculas_por_pagina;
 
 $peliculas = [];
 $generos = [];
 $hay_pagina_siguiente = false;
 
-try {
-    if ($genero_seleccionado) {
-        $query_generos = "SELECT id, name FROM genre ORDER BY name ASC";
-        $result_generos = $pdo->query($query_generos);
-        $generos = $result_generos->fetchAll(PDO::FETCH_ASSOC);
-
+if ($genero_seleccionado !== null) {
+    try {
+        
         $query_peliculas = "SELECT m.id, m.title
                             FROM movie m
                             JOIN moviegenre mg ON m.id = mg.movie_id
@@ -52,21 +49,27 @@ try {
 
         foreach ($peliculas as &$pelicula) {
             $movie_data = get_movie_data($pelicula["title"]);
-            $pelicula["cover"] = $movie_data["cover"] ?? "../images/placeholder.jpg"; // Usamos un placeholder si no se encuentra la imagen
+            // debug
+            echo "<!-- Getting data for: " . $pelicula['title'] . " -->";
+            $pelicula["cover"] = $movie_data["cover"] ?? "../images/placeholder.jpg";
+            echo "<!-- Cover assigned: " . $pelicula["cover"] . " -->";
         }
 
-        $query_count = "SELECT COUNT(*) as total 
-                        FROM movie m
-                        JOIN moviegenre mg ON m.id = mg.movie_id
-                        WHERE mg.genre = $genero_seleccionado";
+        $query_count = "SELECT COUNT(DISTINCT m.id) as total 
+                FROM movie m
+                JOIN moviegenre mg ON m.id = mg.movie_id
+                WHERE mg.genre = $genero_seleccionado";
         $result_count = $pdo->query($query_count);
         $total_peliculas = $result_count->fetch(PDO::FETCH_ASSOC)["total"];
 
         $hay_pagina_siguiente = $total_peliculas > $pagina_actual * $peliculas_por_pagina;
+    } catch (PDOException $e) {
+        echo "Error al cargar los datos: " . $e->getMessage();
+        exit();
     }
-} catch (PDOException $e) {
-    echo "Error al cargar los datos: " . $e->getMessage();
-    exit();
+} else {
+    $peliculas = [];
+    $hay_pagina_siguiente = false;
 }
 
 ?>
@@ -110,8 +113,6 @@ try {
         </div>
     </header>
 
-
-
     <main>
         <h1>Busca películas con nuestro catálogo.</h1>
 
@@ -149,23 +150,31 @@ try {
                             <div data-id="18">Western</div>
                         </div>
                     </div>
-                    <input type="hidden" name="genero_id" id="genero-input">
+                    <input type="hidden" name="genero_input" id="genero_input"
+                        value="<?php echo htmlspecialchars($genero_seleccionado); ?>">
                 </form>
-
 
                 <!-- Contenedor de Películas -->
                 <div class="movies-grid">
                     <?php if (count($peliculas) > 0): ?>
-                        <?php foreach ($peliculas as $pelicula): ?>
-                            <div class="movie-card">
-                                <a href="pelicula.php?pelicula=<?php echo $pelicula['id']; ?>">
-                                    <img src="<?php echo !empty($pelicula['cover']) ? htmlspecialchars($pelicula['cover']) : '../images/placeholder.jpg'; ?>"
-                                        alt="<?php echo htmlspecialchars($pelicula['title']); ?>" class="lazy-image">
-                                    <h3><?php echo htmlspecialchars($pelicula['title']); ?></h3>
-                                    <p>Rating: N/A</p>
-                                </a>
-                            </div>
-                        <?php endforeach; ?>
+                        <?php
+                        $displayed_ids = [];
+                        foreach ($peliculas as $pelicula):
+                            if (!in_array($pelicula['id'], $displayed_ids)):
+                                $displayed_ids[] = $pelicula['id'];
+                                ?>
+                                <div class="movie-card">
+                                    <a href="pelicula.php?pelicula=<?php echo $pelicula['id']; ?>">
+                                        <img src="<?php echo !empty($pelicula['cover']) ? htmlspecialchars($pelicula['cover']) : '../images/placeholder.jpg'; ?>"
+                                            alt="<?php echo htmlspecialchars($pelicula['title']); ?>" class="lazy-image">
+                                        <h3><?php echo htmlspecialchars($pelicula['title']); ?></h3>
+                                        <p>Rating: N/A</p>
+                                    </a>
+                                </div>
+                            <?php
+                            endif;
+                        endforeach;
+                        ?>
                     <?php else: ?>
                         <!-- <p>No se encontraron películas para este género.</p> -->
                     <?php endif; ?>
@@ -174,16 +183,54 @@ try {
                 <!-- Paginación -->
                 <div class="pagination">
                     <?php if ($pagina_actual > 1): ?>
-                        <a href="main.php?genre=<?php echo $genero_seleccionado; ?>&pagina=<?php echo $pagina_actual - 1; ?>"
+                        <a href="catalog.php?genre=<?php echo $genero_seleccionado; ?>&pagina=<?php echo $pagina_actual - 1; ?>"
                             class="pagination-btn">Página Anterior</a>
                     <?php endif; ?>
                     <?php if ($hay_pagina_siguiente): ?>
-                        <a href="main.php?genre=<?php echo $genero_seleccionado; ?>&pagina=<?php echo $pagina_actual + 1; ?>"
+                        <a href="catalog.php?genre=<?php echo $genero_seleccionado; ?>&pagina=<?php echo $pagina_actual + 1; ?>"
                             class="pagination-btn">Página Siguiente</a>
                     <?php endif; ?>
                 </div>
             </div>
         </section>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                var dropdownButton = document.getElementById('dropdown-button');
+                var dropdownList = document.getElementById('dropdown-list');
+                var dropdownArrow = document.getElementById('dropdown-arrow');
+                var generoInput = document.getElementById('genero_input');
+
+                dropdownButton.addEventListener('click', () => {
+                    if (dropdownList.style.display === 'none' || dropdownList.style.display === '') {
+                        dropdownList.style.display = 'block';
+                        dropdownArrow.textContent = '▲';
+                    } else {
+                        dropdownList.style.display = 'none';
+                        dropdownArrow.textContent = '▼';
+                    }
+                });
+
+                dropdownList.addEventListener('click', (event) => {
+                    if (event.target && event.target.matches('div[data-id]')) {
+                        const genreId = event.target.getAttribute('data-id');
+                        generoInput.value = genreId;
+                        dropdownList.classList.add('hidden');
+                        dropdownArrow.textContent = '▼';
+                        document.querySelector('form').submit();
+                    }
+                });
+
+                // Cerrar dropdown
+                document.addEventListener('click', (event) => {
+                    if (!dropdownButton.contains(event.target) && !dropdownList.contains(event.target)) {
+                        dropdownList.style.display = 'none';
+                        dropdownList.classList.add('hidden');
+                        dropdownArrow.textContent = '▼';
+                    }
+                });
+            });
+        </script>
+        <script src="../js/dropdownLogout.js"></script>
     </main>
 
     <footer>
@@ -194,9 +241,6 @@ try {
             <a href="#">Contact Us</a>
         </nav>
     </footer>
-    <script src="../js/dropdownLogout.js"></script>
-    <script src="../js/catalog.js"></script>
-    <script src="../js/lazyload.js"></script>
 </body>
 
 </html>

@@ -31,9 +31,7 @@ try {
 
     $peliculas_por_pagina = 30;
 
-    $offset = ($pagina_actual - 1) * $peliculas_por_pagina;
-
-    $query = "SELECT id, title, date FROM movie LIMIT $peliculas_por_pagina OFFSET $offset";
+    $query = "SELECT m.id, m.title, m.date FROM movie m LIMIT $peliculas_por_pagina";
     $result = $pdo->query($query);
 
     $peliculas = $result->fetchAll(PDO::FETCH_ASSOC);

@@ -8,6 +8,8 @@ main {
   height: auto;
   overflow: visible;
   flex: 1;
+  margin: 20px auto;
+  padding: 0 20px;
 }
 :root {
   /* Colores que reutilizaremos, serán la paleta del trabajo */
