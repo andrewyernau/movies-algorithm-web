@@ -35,6 +35,9 @@ $offset = ($pagina_actual - 1) * $peliculas_por_pagina;
 $peliculas = [];
 $generos = [];
 $hay_pagina_siguiente = false;
+$orden = isset($_GET['sort_input']) ? $_GET['sort_input'] : 'id';
+
+
 
 if ($genero_seleccionado !== null) {
     try {
@@ -43,6 +46,7 @@ if ($genero_seleccionado !== null) {
                             FROM movie m
                             JOIN moviegenre mg ON m.id = mg.movie_id
                             WHERE mg.genre = $genero_seleccionado
+                            ORDER BY $orden
                             LIMIT $peliculas_por_pagina OFFSET $offset";
         $result_peliculas = $pdo->query($query_peliculas);
         $peliculas = $result_peliculas->fetchAll(PDO::FETCH_ASSOC);
@@ -71,7 +75,6 @@ if ($genero_seleccionado !== null) {
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -117,7 +120,7 @@ if ($genero_seleccionado !== null) {
         <section>
             <h2>Nuestro catálogo:</h2>
             <div class="catalog-container">
-                <form method="GET">
+                <form method="GET" id="genre-form">
                     <button type="button" id="dropdown-button">
                         Géneros <span id="dropdown-arrow">▼</span>
                     </button>
@@ -151,6 +154,20 @@ if ($genero_seleccionado !== null) {
                     <input type="hidden" name="genero_input" id="genero_input"
                         value="<?php echo htmlspecialchars($genero_seleccionado); ?>">
                 </form>
+
+                <div class="sort-container">
+                    <form method="GET" id="sort-form">
+                        <input type="hidden" name="genero_input" value="<?php echo htmlspecialchars($genero_seleccionado); ?>">
+                        <button type="button" id="sort-button">
+                            Ordenar por: <span id="sort-arrow">▼</span>
+                        </button>
+                        <div id="sort-options" class="hidden">
+                            <button type="submit" name="sort_input" value="id">ID</button>
+                            <button type="submit" name="sort_input" value="title">Nombre</button>
+                            <button type="submit" name="sort_input" value="rating">Puntuación</button>
+                        </div>
+                    </form>
+                </div>
 
                 <!-- Contenedor de Películas -->
                 <div class="movies-grid">
@@ -197,18 +214,19 @@ if ($genero_seleccionado !== null) {
         </section>
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-              const movieCards = document.querySelectorAll('.movie-card');
+                const movieCards = document.querySelectorAll('.movie-card');
 
-              movieCards.forEach(card => {
-                  const movieTitle = card.dataset.movieTitle;
+                movieCards.forEach(card => {
+                    const movieTitle = card.dataset.movieTitle;
 
-                  fetch(`get_movie_info.php?title=${encodeURIComponent(movieTitle)}`)
-                      .then(response => response.json())
-                      .then(data => {
-                          const img = card.querySelector('img');
-                          img.src = data.cover;
-                      });
-              });
+                    fetch(`get_movie_info.php?title=${encodeURIComponent(movieTitle)}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const img = card.querySelector('img');
+                            img.src = data.cover;
+                        });
+                });
+
                 var dropdownButton = document.getElementById('dropdown-button');
                 var dropdownList = document.getElementById('dropdown-list');
                 var dropdownArrow = document.getElementById('dropdown-arrow');
@@ -230,7 +248,7 @@ if ($genero_seleccionado !== null) {
                         generoInput.value = genreId;
                         dropdownList.classList.add('hidden');
                         dropdownArrow.textContent = '▼';
-                        document.querySelector('form').submit();
+                        document.getElementById('genre-form').submit();
                     }
                 });
 
@@ -242,6 +260,7 @@ if ($genero_seleccionado !== null) {
                         dropdownArrow.textContent = '▼';
                     }
                 });
+
             });
         </script>
         <script src="../js/dropdownLogout.js"></script>
