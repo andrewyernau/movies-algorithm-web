@@ -1,5 +1,11 @@
+html {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
 header {
     background-color: black;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -19,9 +25,7 @@ ul {
   gap: 20px;
 }
 li {
-  float: left;
-  font-family: Arial, sans-serif;
-  font-weight: bold;
+  float: left
 }
 li a {
   display: block;
