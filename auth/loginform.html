@@ -1,14 +1,22 @@
- <div style="max-width: 400px; margin: 20px auto; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); background: white;">
+<div
+    style="
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 30px;
+        border-radius: 10px;
+        background: white;
+    "
+>
     <form method="POST" action="/auth/login.php">
         <!-- Tanto id="username" e id="password" se enviarán por PDO-->
         <label for="username">Usuario:</label>
-        <input type="text" name="username" id="username" required>
-        <br>
-        <br>
+        <input type="text" name="username" id="username" required />
+        <br />
+        <br />
         <label for="password">Contraseña:</label>
-        <input type="password" name="password" id="password" required>
-        <br>
-        <br>
+        <input type="password" name="password" id="password" required />
+        <br />
+        <br />
         <button class="cs-button-solid" type="submit">Login</button>
     </form>
 </div>

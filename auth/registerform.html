@@ -1,20 +1,20 @@
-   <div style="max-width: 400px; margin: 20px auto; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); background: white;">
+   <div style="max-width: 400px; margin: 20px auto; padding: 30px; border-radius: 10px;  background: white;">
     <form method="POST" action="/auth/register.php" style="display: flex; flex-direction: column; gap: 15px;">
         <label for="username">Usuario: *</label>
         <input type="text" name="name" id="username" required style="padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
-        
+
         <label for="password">Contraseña: *</label>
         <input type="password" name="password" id="password" required style="padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
-        
+
         <label for="edad">Edad:</label>
         <input type="number" name="edad" id="edad" style="padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
-        
+
         <label for="sex">Sexo:</label>
         <select name="sex" id="sex" style="padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
             <option value="M">Masculino</option>
             <option value="F">Femenino</option>
         </select>
-        
+
         <label for="ocupacion">Ocupación:</label>
         <select name="ocupacion" id="ocupacion" style="padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
             <option value="none">None</option>
@@ -39,10 +39,10 @@
             <option value="writer">Writer</option>
             <option value="other">Other</option>
         </select>
-        
+
         <label for="pic">Enlace de imagen de perfil:</label>
         <input type="url" name="pic" id="pic" style="padding: 8px; border-radius: 4px; border: 1px solid #ddd;">
-        
+
         <button class="cs-button-solid" type="submit" >Registrar</button>
     </form>
-</div> 
+</div>
