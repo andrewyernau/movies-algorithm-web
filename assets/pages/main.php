@@ -2,6 +2,7 @@
 require_once "../../auth/check_session.php";
 require_once "../../includes/conectar.php";
 require_once "../../includes/common.php";
+require_once "./get_movie_info.php";
 
 try {
     $pdo = conectar();
@@ -89,25 +90,23 @@ try {
             <div class="carousel-container">
                 <button class="carousel-btn left-btn">❮</button>
                 <div class="carousel">
-                    <?php foreach ($peliculas as $pelicula) {
-                        $movie_data = get_movie_data($pelicula["title"]);
-                        echo '
-    <div class="movie-card">
-    <a href="pelicula.php?pelicula=' .
-                            $pelicula["id"] .
-                            '">
-        <img data-src="' .
-                            htmlspecialchars($movie_data["cover"]) .
-                            '" alt="' .
-                            htmlspecialchars($pelicula["title"]) .
-                            '" class="lazy-image">
-        <h3>' .
-                            htmlspecialchars($pelicula["title"]) .
-                            '</h3>
-        <p>Rating: N/A</p>
-        </a>
-    </div>';
-                    } ?>
+                    <?php foreach ($peliculas as $pelicula) { ?>
+                        <div class="movie-card" data-movie-id="<?php echo $pelicula[
+                            "id"
+                        ]; ?>" data-movie-title="<?php echo htmlspecialchars(
+    $pelicula["title"]
+); ?>">
+                            <a href="pelicula.php?pelicula=<?php echo $pelicula[
+                                "id"
+                            ]; ?>">
+                                <img src="../images/placeholder.png" alt="Loading...">
+                                <h3><?php echo htmlspecialchars(
+                                    $pelicula["title"]
+                                ); ?></h3>
+                                <p>Loading...</p>
+                            </a>
+                        </div>
+                    <?php } ?>
                 </div>
                 <button class="carousel-btn right-btn">❯</button>
             </div>
@@ -146,4 +145,21 @@ try {
     </footer>
 </body>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const movieCards = document.querySelectorAll('.movie-card');
+
+    movieCards.forEach(card => {
+        const movieTitle = card.dataset.movieTitle;
+
+        fetch(`get_movie_info.php?title=${encodeURIComponent(movieTitle)}`)
+            .then(response => response.json())
+            .then(data => {
+                const img = card.querySelector('img');
+                img.src = data.cover;
+                // Actualiza otros datos si los necesitas
+            });
+    });
+});
+</script>
 </html>
