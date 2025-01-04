@@ -39,15 +39,30 @@ $orden = isset($_GET['sort_input']) ? $_GET['sort_input'] : 'id';
 
 
 
-if ($genero_seleccionado !== null) {
+if ($genero_seleccionado == null) {
+    $query_peliculas = "SELECT m.id, m.title
+                        FROM movie m
+                        ORDER BY $orden
+                        LIMIT $peliculas_por_pagina OFFSET $offset";
+    $query_count = "SELECT COUNT(id) as total from movie";
+
+} else {
+    $query_peliculas = "SELECT m.id, m.title
+                        FROM movie m
+                        JOIN moviegenre mg ON m.id = mg.movie_id
+                        WHERE mg.genre = $genero_seleccionado
+                        ORDER BY $orden
+                        LIMIT $peliculas_por_pagina OFFSET $offset";
+
+
+    $query_count = "SELECT COUNT(DISTINCT m.id) as total
+                        FROM movie m
+                        JOIN moviegenre mg ON m.id = mg.movie_id
+                        WHERE mg.genre = $genero_seleccionado";
+
+}
     try {
 
-        $query_peliculas = "SELECT m.id, m.title
-                            FROM movie m
-                            JOIN moviegenre mg ON m.id = mg.movie_id
-                            WHERE mg.genre = $genero_seleccionado
-                            ORDER BY $orden
-                            LIMIT $peliculas_por_pagina OFFSET $offset";
         $result_peliculas = $pdo->query($query_peliculas);
         $peliculas = $result_peliculas->fetchAll(PDO::FETCH_ASSOC);
 
@@ -57,10 +72,6 @@ if ($genero_seleccionado !== null) {
             echo "<!-- Cover assigned: " . $pelicula["cover"] . " -->";
         }
 
-        $query_count = "SELECT COUNT(DISTINCT m.id) as total
-                FROM movie m
-                JOIN moviegenre mg ON m.id = mg.movie_id
-                WHERE mg.genre = $genero_seleccionado";
         $result_count = $pdo->query($query_count);
         $total_peliculas = $result_count->fetch(PDO::FETCH_ASSOC)["total"];
 
@@ -69,10 +80,6 @@ if ($genero_seleccionado !== null) {
         echo "Error al cargar los datos: " . $e->getMessage();
         exit();
     }
-} else {
-    $peliculas = [];
-    $hay_pagina_siguiente = false;
-}
 
 ?>
 <!DOCTYPE html>
