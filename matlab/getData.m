@@ -6,10 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 %Ponga el nombre de su base de datos al final
-url = 'jdbc:mysql://localhost:3306/aiXX';
+url = 'jdbc:mysql://localhost:3306/ai0';
 %Ponga su usuario aqui
-user = 'aiXX';
-password = 'rumplestitlskin';
+user = 'ai0';
+password = '';
 
 con = DriverManager.getConnection(url, user, password);
 %Cargamos las peliculas
