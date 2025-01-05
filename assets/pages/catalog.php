@@ -27,8 +27,8 @@ try {
 }
 
 $pagina_actual = isset($_GET["pagina"]) ? (int) $_GET["pagina"] : 1;
-$genero_seleccionado = isset($_GET["genero_input"]) ? (int) $_GET["genero_input"] : null;
-$filtrado_seleccionado = isset($_GET["sort_input"]) ? (int) $_GET["sort_input"] : null;
+$genero_seleccionado = $_GET['genero_input'] ?? null; 
+$filtrado_seleccionado = $_GET['sort_input'] ?? null; 
 $peliculas_por_pagina = 30;
 $offset = ($pagina_actual - 1) * $peliculas_por_pagina;
 
@@ -180,36 +180,73 @@ function getGenreName($id)
                     </button>
                     <div id="dropdown-list-genre" class="hidden">
                         <div class="column">
-                            <div data-id="1">Acción</div>
-                            <div data-id="2">Aventura</div>
-                            <div data-id="3">Animación</div>
-                            <div data-id="15">Ciencia Ficción</div>
-                            <div data-id="10">Cine Negro</div>
-                            <div data-id="5">Comedia</div>
-                            <div data-id="6">Crimen</div>
+                            <div>
+                                <input type="submit" name="genero_input" value="1"> Acción
+                            </div>
+                            <div>
+                                <input type="submit" name="genero_input" value="2"> Aventura
+                            </div>
+                            <div>
+                                <input type="submit" name="genero_input" value="3"> Animación
+                            </div>
+                            <div>
+                                <input type="submit" name="genero_input" value="15"> Ciencia Ficción  
+                            </div>
+                            <div>
+                                <input type="submit" name="genero_input" value="10"> Cine Negro
+                            </div>
+                            <div>
+                                <input type="submit" name="genero_input" value="5"> Comedia
+                            </div>
+                            <div>
+                                <input type="submit" name="genero_input" value="6"> Crimen
+                            </div>
                         </div>
                         <div class="column">
-                            <div data-id="0">Desconocido</div>
-                            <div data-id="7">Documental</div>
-                            <div data-id="8">Drama</div>
-                            <div data-id="9">Fantasía</div>
-                            <div data-id="17">Guerra</div>
-                            <div data-id="4">Infantil</div>
-                            <div data-id="13">Misterio</div>
+                            <div>
+                                <input type="submit" name="genero_input" value="0"> Desconocido
+                            </div>
+                            <div>
+                                <input type="submit" name="genero_input" value="7"> Documental
+                            </div>
+                            <div>
+                                <input type="submit" name="genero_input" value="8"> Drama
+                            </div>
+                            <div>
+                                <input type="submit" name="genero_input" value="9"> Fantasía
+                            </div>
+                            <div>
+                                <input type="submit" name="genero_input" value="17"> Guerra
+                            </div>
+                            <div>
+                                <input type="submit" name="genero_input" value="4"> Infantil
+                            </div>
+                            <div>
+                                <input type="submit" name="genero_input" value="13"> Misterio
+                            </div>
                         </div>
                         <div class="column">
-                            <div data-id="12">Musical</div>
-                            <div data-id="14">Romance</div>
-                            <div data-id="16">Suspenso</div>
-                            <div data-id="11">Terror</div>
-                            <div data-id="18">Western</div>
+                            <div>
+                                <input type="submit" name="genero_input" value="12"> Musical
+                            </div>
+                            <div>
+                                <input type="submit" name="genero_input" value="14"> Romance
+                            </div>
+                            <div>
+                                <input type="submit" name="genero_input" value="16"> Suspenso
+                            </div>
+                            <div>
+                                <input type="submit" name="genero_input" value="11"> Terror
+                            </div>
+                            <div>
+                                <input type="submit" name="genero_input" value="18"> Western
+                            </div>
                         </div>
                     </div>
-                    <input type="hidden" name="genero_input" id="genero_input"
-                        value="<?php echo htmlspecialchars($genero_seleccionado); ?>">
                     <input type="hidden" name="sort_input" id="sort_input"
                         value="<?php echo htmlspecialchars($filtrado_seleccionado); ?>">
                 </form>
+
 
                 <!-- Contenedor de Filtrados -->
                 <div class="sort-container">
@@ -219,16 +256,21 @@ function getGenreName($id)
                         </button>
                         <div id="dropdown-list-sort" class="hidden">
                             <div class="column">
-                                <div sort-id="id">ID</div>
-                                <div sort-id="title">Nombre</div>
-                                <div sort-id="rating">Puntuación</div>
+                                <div>
+                                    <input type="submit" name="sort_input" value="id" > ID
+                                </div>
+                                <div>
+                                    <input type="submit" name="sort_input" value="title" > Título
+                                </div>
+                                <div>
+                                    <input type="submit" name="sort_input" value="rating" > Puntuación
+                                </div>
                             </div>
                         </div>
                         <input type="hidden" name="genero_input" id="genero_input"
                             value="<?php echo htmlspecialchars($genero_seleccionado); ?>">
-                        <input type="hidden" name="sort_input" id="sort_input"
-                            value="<?php echo htmlspecialchars($filtrado_seleccionado); ?>">
                     </form>
+
                 </div>
 
                 <!-- Contenedor de Películas -->
