@@ -47,7 +47,14 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $titulo; ?> - Descripción</title>
-
+    <link rel="icon" type="image/x-icon" href="/assets/images/ico.ico">
+    <link href='https://fonts.googleapis.com/css?family=DM Sans' rel='stylesheet'>
+    <style>
+        body {
+            font-family: 'DM Sans';
+            font-size: 22px;
+        }
+    </style>
     <link rel="stylesheet" href="../css/pelicula.css">
     <link rel="stylesheet" href="../css/core.css">
 </head>
