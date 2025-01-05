@@ -105,6 +105,20 @@ try {
             </div>
         </div>
         <div class="comments-container">
+            <h2>¡Puntúa la película!</h2>
+            <form action="../php/puntuar_pelicula.php" method="post">
+                <select id="puntuacion" name="puntuacion">
+                    <?php for ($i = 1; $i <= 10; $i++): ?>
+                        <option value="<?php echo $i; ?>">⭐<?php echo $i; ?></option>
+                    <?php endfor; ?>
+                </select>
+                <input type="hidden" name="user_id" id="user_id"
+                value="<?php echo htmlspecialchars($user_id); ?>">
+                <input type="hidden" name="movie_id" id="movie_id"
+                value="<?php echo htmlspecialchars($id_pelicula); ?>">
+                <button type="submit" class="rounded cs-button-solid">Enviar puntuación</button>
+            </form>
+
             <h2> ¡Crea tu comentario! </h2>
             <form action="../php/crear_comentario.php" method="post">
                 <input type="text" id="texto" name="texto">
