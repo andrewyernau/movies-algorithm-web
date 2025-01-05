@@ -67,6 +67,7 @@ try {
             <img src="<?php echo $userpic; ?>" alt="User Avatar">
             <span><?php echo $username; ?></span>
             <div class="dropdown-menu">
+                <a href="profile.php"> Mi perfil </a>
                 <a href="../../auth/logout.php">Cerrar sesión</a>
             </div>
         </div>

@@ -116,6 +116,7 @@ if ($genero_seleccionado == null) {
             <img src="<?php echo $userpic; ?>" alt="User Avatar">
             <span><?php echo $username; ?></span>
             <div class="dropdown-menu">
+                <a href="profile.php"> Mi perfil </a>
                 <a href="../../auth/logout.php">Log out</a>
             </div>
         </div>
