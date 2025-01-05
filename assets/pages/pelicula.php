@@ -52,7 +52,6 @@ try {
     <style>
         body {
             font-family: 'DM Sans';
-            font-size: 22px;
         }
     </style>
     <link rel="stylesheet" href="../css/pelicula.css">
