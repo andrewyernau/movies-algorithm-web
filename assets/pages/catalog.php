@@ -28,59 +28,105 @@ try {
 
 $pagina_actual = isset($_GET["pagina"]) ? (int) $_GET["pagina"] : 1;
 $genero_seleccionado = isset($_GET["genero_input"]) ? (int) $_GET["genero_input"] : null;
-
-$peliculas_por_pagina = 31;
+$filtrado_seleccionado = isset($_GET["sort_input"]) ? (int) $_GET["sort_input"] : null;
+$peliculas_por_pagina = 30;
 $offset = ($pagina_actual - 1) * $peliculas_por_pagina;
 
 $peliculas = [];
-$generos = [];
 $hay_pagina_siguiente = false;
-$orden = isset($_GET['sort_input']) ? $_GET['sort_input'] : 'id';
 
-
-
-if ($genero_seleccionado == null) {
-    $query_peliculas = "SELECT m.id, m.title
-                        FROM movie m
-                        ORDER BY $orden
-                        LIMIT $peliculas_por_pagina OFFSET $offset";
-    $query_count = "SELECT COUNT(id) as total from movie";
-
-} else {
-    $query_peliculas = "SELECT m.id, m.title
-                        FROM movie m
-                        JOIN moviegenre mg ON m.id = mg.movie_id
-                        WHERE mg.genre = $genero_seleccionado
-                        ORDER BY $orden
-                        LIMIT $peliculas_por_pagina OFFSET $offset";
-
-
-    $query_count = "SELECT COUNT(DISTINCT m.id) as total
-                        FROM movie m
-                        JOIN moviegenre mg ON m.id = mg.movie_id
-                        WHERE mg.genre = $genero_seleccionado";
-
-}
-    try {
-
-        $result_peliculas = $pdo->query($query_peliculas);
-        $peliculas = $result_peliculas->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($peliculas as &$pelicula) {
-            echo "<!-- Getting data for: " . $pelicula['title'] . " -->";
-            $pelicula["cover"] = "../images/placeholder.jpg";
-            echo "<!-- Cover assigned: " . $pelicula["cover"] . " -->";
-        }
-
-        $result_count = $pdo->query($query_count);
-        $total_peliculas = $result_count->fetch(PDO::FETCH_ASSOC)["total"];
-
-        $hay_pagina_siguiente = $total_peliculas > $pagina_actual * $peliculas_por_pagina;
-    } catch (PDOException $e) {
-        echo "Error al cargar los datos: " . $e->getMessage();
-        exit();
+try {
+    $orden = 'm.title ASC';
+    if ($filtrado_seleccionado !== null) {
+        $orden = match ($filtrado_seleccionado) {
+            'title' => 'm.title ASC',
+            'rating' => 'm.rating DESC',
+            'id' => 'm.id ASC',
+            default => 'm.title ASC'
+        };
     }
 
+    $baseQuery = "FROM movie m";
+    $whereClause = "";
+    $params = [];
+
+    if ($genero_seleccionado !== null) {
+        $baseQuery .= " JOIN moviegenre mg ON m.id = mg.movie_id";
+        $whereClause = " WHERE mg.genre = :genero";
+        $params[':genero'] = $genero_seleccionado;
+    }
+
+    $query_count = "SELECT COUNT(DISTINCT m.id) as total " . $baseQuery . $whereClause;
+    $stmt_count = $pdo->prepare($query_count);
+    $stmt_count->execute($params);
+    $total_peliculas = $stmt_count->fetch(PDO::FETCH_ASSOC)["total"];
+
+    $query_peliculas = "SELECT m.id, m.title " .
+        $baseQuery .
+        $whereClause .
+        " GROUP BY m.id, m.title " .
+        " ORDER BY " . $orden .
+        " LIMIT :limit OFFSET :offset";
+
+    $stmt = $pdo->prepare($query_peliculas);
+    foreach ($params as $key => $value) {
+        $stmt->bindValue($key, $value, PDO::PARAM_INT);
+    }
+    $stmt->bindValue(':limit', $peliculas_por_pagina, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $peliculas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $hay_pagina_siguiente = $total_peliculas > ($pagina_actual * $peliculas_por_pagina);
+
+} catch (PDOException $e) {
+    error_log("Error en la base de datos: " . $e->getMessage());
+    echo "Ha ocurrido un error al cargar los datos. Por favor, inténtelo de nuevo.";
+    exit();
+}
+function getGenreName($id)
+{
+    switch ($id) {
+        case 0:
+            return "Desconocido";
+        case 1:
+            return "Acción";
+        case 2:
+            return "Aventura";
+        case 3:
+            return "Animación";
+        case 4:
+            return "Infantil";
+        case 5:
+            return "Comedia";
+        case 6:
+            return "Crimen";
+        case 7:
+            return "Documental";
+        case 8:
+            return "Drama";
+        case 9:
+            return "Fantasía";
+        case 10:
+            return "Cine Negro";
+        case 11:
+            return "Terror";
+        case 12:
+            return "Musical";
+        case 13:
+            return "Misterio";
+        case 14:
+            return "Romance";
+        case 15:
+            return "Ciencia Ficción";
+        case 16:
+            return "Suspenso";
+        case 17:
+            return "Guerra";
+        case 18:
+            return "Western";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,16 +143,16 @@ if ($genero_seleccionado == null) {
             font-size: 22px;
         }
     </style>
-    <link rel="stylesheet" href="../css/core.css">
-    <link rel="stylesheet" href="../css/catalog.css">
+    <link rel="stylesheet" href="/assets/css/core.css">
+    <link rel="stylesheet" href="/assets/css/catalogo.css">
 </head>
 
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="main.php" style="font-weight: bold; font-size: 1.5em;">Inicio</a></li>
-                <li><a href="catalog.php">Catálogo</a></li>
+                <li><a href="main.php" style="font-weight: bold; font-size: 1.5em;">IMDb</a></li>
+                <li><a href="./catalog.php">Catálogo</a></li>
                 <li><a href="#">TV Shows</a></li>
                 <li><a href="#">Celebrities</a></li>
                 <li><a href="#">News</a></li>
@@ -116,23 +162,25 @@ if ($genero_seleccionado == null) {
             <img src="<?php echo $userpic; ?>" alt="User Avatar">
             <span><?php echo $username; ?></span>
             <div class="dropdown-menu">
-                <a href="profile.php"> Mi perfil </a>
-                <a href="../../auth/logout.php">Log out</a>
+                <a href="../../auth/logout.php">Cerrar sesión</a>
             </div>
         </div>
     </header>
 
+    <script src="/assets/js/dropdownLogout.js"></script>
     <main>
         <h1>Busca películas con nuestro catálogo.</h1>
 
         <section>
             <h2>Nuestro catálogo:</h2>
+
+            <!-- Contenedor de Géneros -->
             <div class="catalog-container">
                 <form method="GET" id="genre-form">
-                    <button type="button" id="dropdown-button">
-                        Géneros <span id="dropdown-arrow">▼</span>
+                    <button type="button" id="dropdown-button-genre">
+                        Géneros <span id="dropdown-arrow-genre">▼</span>
                     </button>
-                    <div id="dropdown-list" class="hidden">
+                    <div id="dropdown-list-genre" class="hidden">
                         <div class="column">
                             <div data-id="1">Acción</div>
                             <div data-id="2">Aventura</div>
@@ -163,62 +211,77 @@ if ($genero_seleccionado == null) {
                         value="<?php echo htmlspecialchars($genero_seleccionado); ?>">
                 </form>
 
+                <!-- Contenedor de Filtrados -->
                 <div class="sort-container">
                     <form method="GET" id="sort-form">
-                        <input type="hidden" name="genero_input" value="<?php echo htmlspecialchars($genero_seleccionado); ?>">
-                        <button type="button" id="sort-button">
-                            Ordenar por: <span id="sort-arrow">▼</span>
+                        <button type="button" id="dropdown-button-sort">
+                            Ordenar por: <span id="dropdown-arrow-sort">▼</span>
                         </button>
-                        <div id="sort-options" class="hidden">
-                            <button type="submit" name="sort_input" value="id">ID</button>
-                            <button type="submit" name="sort_input" value="title">Nombre</button>
-                            <button type="submit" name="sort_input" value="rating">Puntuación</button>
+                        <div id="dropdown-list-sort" class="hidden">
+                            <div class="column">
+                                <div sort-id="id">ID</div>
+                                <div sort-id="title">Nombre</div>
+                                <div sort-id="rating">Puntuación</div>
+                            </div>
                         </div>
+                        <input type="hidden" name="sort_input" id="sort_input"
+                            value="<?php echo htmlspecialchars($filtrado_seleccionado); ?>">
                     </form>
                 </div>
 
                 <!-- Contenedor de Películas -->
-                <div class="movies-grid">
-                    <?php if (count($peliculas) > 0): ?>
-                        <?php
-                        $displayed_ids = [];
-                        foreach ($peliculas as $pelicula):
-                            if (!in_array($pelicula['id'], $displayed_ids)):
-                                $displayed_ids[] = $pelicula['id'];
-                                ?>
-                                    <div class="movie-card" data-movie-id="<?php echo $pelicula[
-                                        "id"
-                                    ]; ?>" data-movie-title="<?php echo htmlspecialchars(
-                                         $pelicula["title"]
-                                     ); ?>">
-                                    <a href="pelicula.php?pelicula=<?php echo $pelicula['id']; ?>">
-                                        <img src="<?php echo !empty($pelicula['cover']) ? htmlspecialchars($pelicula['cover']) : '../images/placeholder.jpg'; ?>"
-                                            alt="<?php echo htmlspecialchars($pelicula['title']); ?>" class="lazy-image">
-                                        <h3><?php echo htmlspecialchars($pelicula['title']); ?></h3>
-                                        <p>Rating: N/A</p>
-                                    </a>
-                                </div>
+                <div class="movies-container">
+                    <?php if ($genero_seleccionado !== null): ?>
+                        <div class="genre-title">
                             <?php
-                            endif;
-                        endforeach;
-                        ?>
+                            $name = getGenreName($genero_seleccionado);
+                            echo "<p>Estás buscando: {$name}</p>";
+                            ?>
+                        </div>
+
+                        <div class="movies-grid">
+                            <?php if (count($peliculas) > 0): ?>
+                                <?php
+                                $displayed_ids = [];
+                                foreach ($peliculas as $pelicula):
+                                    if (!in_array($pelicula['id'], $displayed_ids)):
+                                        $displayed_ids[] = $pelicula['id'];
+                                        ?>
+                                        <div class="movie-card" data-movie-id="<?php echo $pelicula["id"]; ?>"
+                                            data-movie-title="<?php echo htmlspecialchars($pelicula["title"]); ?>">
+                                            <a href="pelicula.php?pelicula=<?php echo $pelicula['id']; ?>">
+                                                <img src="<?php echo !empty($pelicula['cover']) ?
+                                                    htmlspecialchars($pelicula['cover']) : '../images/placeholder.jpg'; ?>"
+                                                    alt="<?php echo htmlspecialchars($pelicula['title']); ?>" class="lazy-image">
+                                                <h3><?php echo htmlspecialchars($pelicula['title']); ?></h3>
+                                                <p>Rating: N/A</p>
+                                            </a>
+                                        </div>
+                                        <?php
+                                    endif;
+                                endforeach;
+                                ?>
+                            <?php else: ?>
+                                <p>No se encontraron películas para este género.</p>
+                            <?php endif; ?>
+                        </div>
                     <?php else: ?>
-                        <!-- <p>No se encontraron películas para este género.</p> -->
+                        <p>Selecciona un género para ver las películas disponibles.</p>
                     <?php endif; ?>
                 </div>
-
                 <!-- Paginación -->
                 <div class="pagination">
-                    <?php if ($pagina_actual > 1): ?>
-                        <a href="catalog.php?genre=<?php echo $genero_seleccionado; ?>&pagina=<?php echo $pagina_actual - 1; ?>"
-                            class="pagination-btn">Página Anterior</a>
-                    <?php endif; ?>
-                    <?php if ($hay_pagina_siguiente): ?>
-                        <a href="catalog.php?genre=<?php echo $genero_seleccionado; ?>&pagina=<?php echo $pagina_actual + 1; ?>"
-                            class="pagination-btn">Página Siguiente</a>
+                    <?php if ($genero_seleccionado !== null): ?>
+                        <?php if ($pagina_actual > 1): ?>
+                            <a href="catalog.php?genero_input=<?php echo $genero_seleccionado; ?>&sort_input=<?php echo $filtrado_seleccionado; ?>&pagina=<?php echo $pagina_actual - 1; ?>"
+                                class="pagination-btn">Página Anterior</a>
+                        <?php endif; ?>
+                        <?php if ($hay_pagina_siguiente): ?>
+                            <a href="catalog.php?genero_input=<?php echo $genero_seleccionado; ?>&sort_input=<?php echo $filtrado_seleccionado; ?>&pagina=<?php echo $pagina_actual + 1; ?>"
+                                class="pagination-btn">Página Siguiente</a>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </div>
-            </div>
         </section>
         <script>
             document.addEventListener('DOMContentLoaded', () => {
@@ -234,44 +297,88 @@ if ($genero_seleccionado == null) {
                             img.src = data.cover;
                         });
                 });
+                /* Botones de género y filtro */
+                var dropdownButtonGenre = document.getElementById('dropdown-button-genre');
+                var dropdownButtonSort = document.getElementById('dropdown-button-sort');
 
-                var dropdownButton = document.getElementById('dropdown-button');
-                var dropdownList = document.getElementById('dropdown-list');
-                var dropdownArrow = document.getElementById('dropdown-arrow');
+                /* Elementos dropdown */
+                var dropdownListGenre = document.getElementById('dropdown-list-genre');
+                var dropdownArrowGenre = document.getElementById('dropdown-arrow-genre');
+
+                var dropdownListSort = document.getElementById('dropdown-list-sort');
+                var dropdownArrowSort = document.getElementById('dropdown-arrow-sort');
+
+                /* Inputs ocultos */
                 var generoInput = document.getElementById('genero_input');
+                var sortInput = document.getElementById('sort_input');
 
-                dropdownButton.addEventListener('click', () => {
-                    if (dropdownList.style.display === 'none' || dropdownList.style.display === '') {
-                        dropdownList.style.display = 'block';
-                        dropdownArrow.textContent = '▲';
+                dropdownButtonGenre.addEventListener('click', () => {
+                    if (dropdownListGenre.style.display === 'none' || dropdownListGenre.style.display === '') {
+                        dropdownListGenre.style.display = 'block';
+                        dropdownArrowGenre.textContent = '▲';
                     } else {
-                        dropdownList.style.display = 'none';
-                        dropdownArrow.textContent = '▼';
+                        dropdownListGenre.style.display = 'none';
+                        dropdownArrowGenre.textContent = '▼';
                     }
                 });
 
-                dropdownList.addEventListener('click', (event) => {
+                dropdownButtonSort.addEventListener('click', () => {
+                    if (dropdownListSort.style.display === 'none' || dropdownListSort.style.display === '') {
+                        dropdownListSort.style.display = 'block';
+                        dropdownArrowSort.textContent = '▲';
+                    } else {
+                        dropdownListSort.style.display = 'none';
+                        dropdownArrowSort.textContent = '▼';
+                    }
+                });
+
+                dropdownListGenre.addEventListener('click', (event) => {
                     if (event.target && event.target.matches('div[data-id]')) {
                         const genreId = event.target.getAttribute('data-id');
                         generoInput.value = genreId;
-                        dropdownList.classList.add('hidden');
-                        dropdownArrow.textContent = '▼';
+                        dropdownListGenre.classList.add('hidden');
+                        dropdownArrowGenre.textContent = '▼';
                         document.getElementById('genre-form').submit();
                     }
                 });
 
-                // Cerrar dropdown
-                document.addEventListener('click', (event) => {
-                    if (!dropdownButton.contains(event.target) && !dropdownList.contains(event.target)) {
-                        dropdownList.style.display = 'none';
-                        dropdownList.classList.add('hidden');
-                        dropdownArrow.textContent = '▼';
+                dropdownListSort.addEventListener('click', (event) => {
+                    if (event.target && event.target.matches('div[sort-id]')) {
+                        const sortId = event.target.getAttribute('sort-id');
+                        sortInput.value = sortId;
+                        dropdownListSort.classList.add('hidden');
+                        dropdownArrowSort.textContent = '▼';
+                        document.getElementById('sort-form').submit();
                     }
+                });
+
+                // Cerrar dropdown al pulsar
+                document.addEventListener('click', (event) => {
+                    if (!dropdownButtonGenre.contains(event.target) && !dropdownListGenre.contains(event.target)) {
+                        dropdownListGenre.style.display = 'none';
+                        dropdownListGenre.classList.add('hidden');
+                        dropdownArrowGenre.textContent = '▼';
+                    }
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!dropdownButtonSort.contains(event.target) && !dropdownListSort.contains(event.target)) {
+                        dropdownListSort.style.display = 'none';
+                        dropdownListSort.classList.add('hidden');
+                        dropdownArrowSort.textContent = '▼';
+                    }
+                });
+
+                // Corregir el listener del botón de ordenamiento
+                dropdownButtonSort.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    dropdownListSort.classList.toggle('hidden');
+                    dropdownListSort.style.display = dropdownListSort.classList.contains('hidden') ? 'none' : 'block';
+                    dropdownArrowSort.textContent = dropdownListSort.classList.contains('hidden') ? '▼' : '▲';
                 });
 
             });
         </script>
-        <script src="../js/dropdownLogout.js"></script>
     </main>
 
     <footer>
