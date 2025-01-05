@@ -209,6 +209,8 @@ function getGenreName($id)
                     </div>
                     <input type="hidden" name="genero_input" id="genero_input"
                         value="<?php echo htmlspecialchars($genero_seleccionado); ?>">
+                    <input type="hidden" name="sort_input" id="sort_input"
+                        value="<?php echo htmlspecialchars($filtrado_seleccionado); ?>">
                 </form>
 
                 <!-- Contenedor de Filtrados -->
@@ -224,6 +226,8 @@ function getGenreName($id)
                                 <div sort-id="rating">Puntuación</div>
                             </div>
                         </div>
+                        <input type="hidden" name="genero_input" id="genero_input"
+                            value="<?php echo htmlspecialchars($genero_seleccionado); ?>">
                         <input type="hidden" name="sort_input" id="sort_input"
                             value="<?php echo htmlspecialchars($filtrado_seleccionado); ?>">
                     </form>
@@ -286,7 +290,8 @@ function getGenreName($id)
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const movieCards = document.querySelectorAll('.movie-card');
-
+                const genreForm = document.getElementById('genre-form');
+                const sortForm = document.getElementById('sort-form');
                 movieCards.forEach(card => {
                     const movieTitle = card.dataset.movieTitle;
 
