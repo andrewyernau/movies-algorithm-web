@@ -96,6 +96,15 @@ function get_movie_rating($movie_id)
     $query = "SELECT AVG(score) AS rating FROM user_score WHERE id_movie = $movie_id";
     $result = $pdo->query($query);
     $rating = $result->fetch(PDO::FETCH_ASSOC);
-    return $rating["rating"];
+    return round($rating["rating"], 1);
+}
+
+function get_movie_rating_count($movie_id)
+{
+    $pdo = conectar();
+    $query = "SELECT COUNT(DISTINCT id_user) FROM user_score WHERE id_movie = $movie_id;";
+    $result = $pdo->query($query);
+    $amount = $result->fetch(PDO::FETCH_ASSOC);
+    return $amount["COUNT(DISTINCT id_user)"];
 }
     ?>

@@ -76,7 +76,12 @@ try {
                 <img src="<?php echo htmlspecialchars(
                     $movie_data["cover"]
                 ); ?>" alt="Cover de la Película">
-                <div class="movie-rating">⭐<?php echo get_movie_rating($id_pelicula); ?> / 5</div>
+                <div class="movie-rating">⭐
+                    <?php echo get_movie_rating($id_pelicula); ?> / 5 
+                <?php echo "</br>";
+                    echo get_movie_rating_count($id_pelicula); ?> valoraciones
+                </div>
+                <div class="movie-rating-count"></div>
             </div>
             <div class="movie-info">
                 <h1 class="movie-title"><?php echo $titulo; ?></h1>
