@@ -108,7 +108,7 @@ try {
             <h2>¡Puntúa la película!</h2>
             <form action="../php/puntuar_pelicula.php" method="post">
                 <select id="puntuacion" name="puntuacion">
-                    <?php for ($i = 1; $i <= 10; $i++): ?>
+                    <?php for ($i = 1; $i <= 5; $i++): ?>
                         <option value="<?php echo $i; ?>">⭐<?php echo $i; ?></option>
                     <?php endfor; ?>
                 </select>

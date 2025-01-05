@@ -1,23 +1,20 @@
 <?php
-// Incluye la función de conexión a la base de datos
-include_once 'conectar.php'; // Asegúrate de que esta ruta sea correcta
+include_once 'conectar.php';
 
-// Llamar a la función de conexión
-$pdo = conectar(); // Obtener la conexión a la base de datos
+$pdo = conectar();
 
 try {
-    // Consulta para obtener todos los géneros
     $sql = "SELECT id, name FROM genre";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+    $res = $pdo->query($sql);
 
-    // Obtener los géneros
-    $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($res === false) {
+        
+        throw new PDOException("Error en la consulta: " . $pdo->errorInfo()[2]);
+    }
 
-    // Devolver los géneros como JSON
+    $genres = $res->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($genres);
 } catch (PDOException $e) {
-    // En caso de error, devolver el mensaje de error como JSON
     echo json_encode(["error" => $e->getMessage()]);
 }
 ?>
