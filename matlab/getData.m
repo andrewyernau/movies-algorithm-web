@@ -14,7 +14,21 @@ password = '';
 con = DriverManager.getConnection(url, user, password);
 %Cargamos las peliculas
 st = con.createStatement();
-rs = st.executeQuery('SELECT title FROM movie');
+rs = st.executeQuery('SELECT COUNT(id) FROM movie');
+rs.next();
+nmovies = rs.getInt(1);
+
+rs = st.executeQuery('SELECT COUNT(id) FROM users');
+rs.next();
+nusers = rs.getInt(1);
+
+rs = st.executeQuery('SELECT COUNT(id) FROM movie');
+rs.next();
+nmovies = rs.getInt(1);
+
+rs = st.executeQuery('SELECT COUNT(id) FROM movie');
+rs.next();
+nmovies = rs.getInt(1);
 
 movieList = cell(1, 1);
 i=1;
