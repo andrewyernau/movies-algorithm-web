@@ -27,8 +27,8 @@ try {
 }
 
 $pagina_actual = isset($_GET["pagina"]) ? (int) $_GET["pagina"] : 1;
-$genero_seleccionado = $_GET['genero_input'] ?? null; 
-$filtrado_seleccionado = $_GET['sort_input'] ?? null; 
+$genero_seleccionado = $_GET['genero_input'] ?? null;
+$filtrado_seleccionado = $_GET['sort_input'] ?? null;
 $peliculas_por_pagina = 30;
 $offset = ($pagina_actual - 1) * $peliculas_por_pagina;
 
@@ -190,7 +190,7 @@ function getGenreName($id)
                                 <input type="submit" name="genero_input" value="3"> Animación
                             </div>
                             <div>
-                                <input type="submit" name="genero_input" value="15"> Ciencia Ficción  
+                                <input type="submit" name="genero_input" value="15"> Ciencia Ficción
                             </div>
                             <div>
                                 <input type="submit" name="genero_input" value="10"> Cine Negro
@@ -298,8 +298,8 @@ function getGenreName($id)
                                                     htmlspecialchars($pelicula['cover']) : '../images/placeholder.jpg'; ?>"
                                                     alt="<?php echo htmlspecialchars($pelicula['title']); ?>" class="lazy-image">
                                                 <h3><?php echo htmlspecialchars($pelicula['title']); ?></h3>
-                                                <p>Rating: N/A</p>
                                             </a>
+                                                <p> ⭐<?php echo get_movie_rating($pelicula['id']); ?> / 5 </p>
                                         </div>
                                         <?php
                                     endif;

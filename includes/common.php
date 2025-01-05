@@ -1,4 +1,5 @@
 <?php
+require_once "conectar.php";
 function returnAPIfromEnv($api_name)
 {
     $env = parse_ini_file("../../.env");
@@ -89,4 +90,12 @@ function get_movie_data($movie_name)
 
     return $movie_data;
 }
-?>
+function get_movie_rating($movie_id)
+{
+    $pdo = conectar();
+    $query = "SELECT AVG(score) AS rating FROM user_score WHERE id_movie = $movie_id";
+    $result = $pdo->query($query);
+    $rating = $result->fetch(PDO::FETCH_ASSOC);
+    return $rating["rating"];
+}
+    ?>
