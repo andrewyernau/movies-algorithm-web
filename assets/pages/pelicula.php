@@ -57,10 +57,7 @@ try {
         <nav>
             <ul>
                 <li><a href="main.php" style="font-weight: bold; font-size: 1.5em;">Inicio</a></li>
-                <li><a href="catalog.php">Catálogo</a></li>
-                <li><a href="#">TV Shows</a></li>
-                <li><a href="#">Celebrities</a></li>
-                <li><a href="#">News</a></li>
+                <li><a href="./catalog.php">Catálogo</a></li>
             </ul>
         </nav>
         <div class="user-info">
@@ -111,29 +108,28 @@ try {
             <h2> ¡Crea tu comentario! </h2>
             <form action="../php/crear_comentario.php" method="post">
                 <input type="text" id="texto" name="texto">
-                <input type="hidden" name="user_id" id="user_id"
-                value="<?php echo htmlspecialchars($user_id); ?>">
+                <input type="hidden" name="user_id" id="user_id" value="<?php echo htmlspecialchars($user_id); ?>">
                 <input type="hidden" name="movie_id" id="movie_id"
-                value="<?php echo htmlspecialchars($id_pelicula); ?>">
+                    value="<?php echo htmlspecialchars($id_pelicula); ?>">
                 <button type="submit" class="rounded cs-button-solid">Enviar comentario</button>
             </form>
-                <h2> Comentarios sobre la película: </h2>
-                <div id="comments-list"></div>
-            </div>
-        </main>
+            <h2> Comentarios sobre la película: </h2>
+            <div id="comments-list"></div>
+        </div>
+    </main>
 
-        <script src="../js/dropdownLogout.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var movieId = <?php echo json_encode($id_pelicula); ?>;
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', '../php/cargar_comentarios.php', true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        document.getElementById('comments-list').innerHTML = xhr.responseText;
-                    }
-                };
-                xhr.send('movie_id=' + movieId);
-            });
-        </script>
+    <script src="../js/dropdownLogout.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var movieId = <?php echo json_encode($id_pelicula); ?>;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '../php/cargar_comentarios.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    document.getElementById('comments-list').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send('movie_id=' + movieId);
+        });
+    </script>

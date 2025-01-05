@@ -151,17 +151,15 @@ function getGenreName($id)
     <header>
         <nav>
             <ul>
-                <li><a href="main.php" style="font-weight: bold; font-size: 1.5em;">IMDb</a></li>
+                <li><a href="main.php" style="font-weight: bold; font-size: 1.5em;">Inicio</a></li>
                 <li><a href="./catalog.php">Catálogo</a></li>
-                <li><a href="#">TV Shows</a></li>
-                <li><a href="#">Celebrities</a></li>
-                <li><a href="#">News</a></li>
             </ul>
         </nav>
         <div class="user-info">
             <img src="<?php echo $userpic; ?>" alt="User Avatar">
             <span><?php echo $username; ?></span>
             <div class="dropdown-menu">
+                <a href="profile.php"> Mi perfil </a>
                 <a href="../../auth/logout.php">Cerrar sesión</a>
             </div>
         </div>
@@ -387,11 +385,11 @@ function getGenreName($id)
     </main>
 
     <footer>
-        <p>&copy; 2024 IMDb Clone. All rights reserved.</p>
+        <p>&copy; 2025 El Recomendador Inc.</p>
         <nav>
-            <a href="#">Privacy Policy</a> |
-            <a href="#">Terms of Service</a> |
-            <a href="#">Contact Us</a>
+            <a href="#">Centro de ayuda</a> |
+            <a href="#">Preferencias de cookies</a> |
+            <a href="#">Términos de uso</a>
         </nav>
     </footer>
 </body>
