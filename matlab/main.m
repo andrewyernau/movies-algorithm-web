@@ -28,15 +28,15 @@ updateRatings(pi, movieList);
 % Normalizamos las puntuaciones
 [Ynorm, Ymean] = normalizeRatings(Y, R);
 
-% Parámetros para el sistema de recomendación
-num_features = 10;
+% Parámetrs para  la recomendación
+num_features = 50;
 lambda = 0.1;
 
 % Inicializamos las matrices de características aleatoriamente
 X = randn(num_movies, num_features);
 Theta = randn(num_users, num_features);
 
-% Minimizamos la función de coste usando fmincg
+% Minimizamos la función de coste
 params = [X(:); Theta(:)];
 costFunction = @(p) cofiCostFunc(p, Ynorm, R, num_users, num_movies, num_features, lambda);
 options = optimset('MaxIter', 100);
