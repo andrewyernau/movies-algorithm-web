@@ -66,7 +66,7 @@ $movies = $result->fetch(PDO::FETCH_ASSOC);
                 <p class="user-title">Perfil de usuario de <?php echo $username; ?></p>
                 <p> <strong> Edad: </strong> <?php echo htmlspecialchars($user["edad"] ?? 'No especificada'); ?></p>
                 <p> <strong> Género: </strong> <?php echo htmlspecialchars($user["sex"] ?? 'No especificada'); ?></p>
-                <p> <strong> Ocupación: </strong> <?php echo htmlspecialchars($user["ocupación"] ?? 'No especificada'); ?></p>
+                <p> <strong> Ocupación: </strong> <?php echo htmlspecialchars($user["ocupacion"] ?? 'No especificada'); ?></p>
                 <p> <strong> Comentarios escritos: </strong> <?php echo htmlspecialchars($comments["count"] ?? 'No especificada'); ?></p>
                 <p> <strong> Películas puntuadas: </strong> <?php echo htmlspecialchars($movies["count"] ?? 'No especificada'); ?> </p>
 

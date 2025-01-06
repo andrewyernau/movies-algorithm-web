@@ -100,7 +100,7 @@ foreach ($movies as $movie) {
                 ); ?>" alt="Cover de la Película">
                 <div class="movie-rating">⭐
                     <?php echo get_movie_rating($id_pelicula); ?> / 5
-                <?php echo "</br>";
+                    <?php echo "</br>";
                     echo get_movie_rating_count($id_pelicula); ?> valoraciones
                 </div>
                 <div class="movie-rating-count"></div>
@@ -136,18 +136,20 @@ foreach ($movies as $movie) {
             <form action="../php/puntuar_pelicula.php" method="post">
                 <select id="puntuacion" name="puntuacion">
                     <?php for ($i = 1; $i <= 5; $i++): ?>
-                        <option value="<?php echo $i; ?>">⭐<?php echo $i; ?></option>
+                        <option value="<?php echo $i; ?>">
+                            <?php echo str_repeat('⭐', $i); ?>
+                        </option>
                     <?php endfor; ?>
                 </select>
-                <input type="hidden" name="user_id" id="user_id"
-                value="<?php echo htmlspecialchars($user_id); ?>">
+
+                <input type="hidden" name="user_id" id="user_id" value="<?php echo htmlspecialchars($user_id); ?>">
                 <input type="hidden" name="movie_id" id="movie_id"
-                value="<?php echo htmlspecialchars($id_pelicula); ?>">
+                    value="<?php echo htmlspecialchars($id_pelicula); ?>">
                 <button type="submit" class="rounded cs-button-solid">Enviar puntuación</button>
             </form>
 
             <?php if ($puntuado): ?>
-                <p>Ya has puntuado esta película con una nota de  <?php echo $rating; ?>⭐, puedes modificarlo</p>
+                <p>Ya has puntuado esta película con una nota de <?php echo $rating; ?>⭐, puedes modificarlo</p>
             <?php endif; ?>
 
             <h2> ¡Crea tu comentario! </h2>
