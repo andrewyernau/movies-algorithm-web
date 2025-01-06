@@ -39,7 +39,23 @@ try {
     echo "Error de conexión: " . $e->getMessage();
     exit();
 }
+
+// comprobar si ya se había puntuado la película
+$query = "SELECT id_movie, score FROM user_score WHERE id_user = $user_id";
+$result = $pdo->query($query);
+$movies = $result->fetchAll(PDO::FETCH_ASSOC);
+$puntuado = false;
+$rating = null;
+
+foreach ($movies as $movie) {
+    if ($movie["id_movie"] == $id_pelicula) {
+        $puntuado = true;
+        $rating = $movie["score"]; // Corregir el error tipográfico
+        break;
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -83,7 +99,7 @@ try {
                     $movie_data["cover"]
                 ); ?>" alt="Cover de la Película">
                 <div class="movie-rating">⭐
-                    <?php echo get_movie_rating($id_pelicula); ?> / 5 
+                    <?php echo get_movie_rating($id_pelicula); ?> / 5
                 <?php echo "</br>";
                     echo get_movie_rating_count($id_pelicula); ?> valoraciones
                 </div>
@@ -129,6 +145,10 @@ try {
                 value="<?php echo htmlspecialchars($id_pelicula); ?>">
                 <button type="submit" class="rounded cs-button-solid">Enviar puntuación</button>
             </form>
+
+            <?php if ($puntuado): ?>
+                <p>Ya has puntuado esta película con una nota de  <?php echo $rating; ?>⭐, puedes modificarlo</p>
+            <?php endif; ?>
 
             <h2> ¡Crea tu comentario! </h2>
             <form action="../php/crear_comentario.php" method="post">
