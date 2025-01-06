@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
     $query = "INSERT INTO user_score (id_user, id_movie, score, time) VALUES ($user_id, $movie_id, $puntuacion, '$timestamp')";
     $pdo->query($query);
-    header("Location: ../pages/pelicula.php?id=$movie_id");
+    header("Location: ../pages/pelicula.php?pelicula=$movie_id");
     exit();
 }
 else{
