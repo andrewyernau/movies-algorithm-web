@@ -102,9 +102,9 @@ function get_movie_rating($movie_id)
 function get_movie_rating_count($movie_id)
 {
     $pdo = conectar();
-    $query = "SELECT COUNT(DISTINCT id_user) FROM user_score WHERE id_movie = $movie_id;";
+    $query = "SELECT COUNT(DISTINCT id_user) AS countr FROM user_score WHERE id_movie = $movie_id;";
     $result = $pdo->query($query);
     $amount = $result->fetch(PDO::FETCH_ASSOC);
-    return $amount["COUNT(DISTINCT id_user)"];
+    return $amount["countr"];
 }
     ?>

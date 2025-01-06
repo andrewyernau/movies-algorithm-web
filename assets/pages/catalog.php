@@ -40,7 +40,7 @@ try {
     if ($filtrado_seleccionado !== null) {
         $orden = match ($filtrado_seleccionado) {
             'title' => 'm.title ASC',
-            'rating' => 'm.rating DESC',
+            'rating' => 'AVG(us.score) DESC',
             'id' => 'm.id ASC',
             default => 'm.title ASC'
         };
@@ -54,6 +54,9 @@ try {
         $baseQuery .= " JOIN moviegenre mg ON m.id = mg.movie_id";
         $whereClause = " WHERE mg.genre = :genero";
         $params[':genero'] = $genero_seleccionado;
+    }
+    if ($filtrado_seleccionado == 'rating') {
+        $baseQuery .= " JOIN user_score us ON m.id = us.id_movie";
     }
 
     $query_count = "SELECT COUNT(DISTINCT m.id) as total " . $baseQuery . $whereClause;
