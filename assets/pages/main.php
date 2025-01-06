@@ -7,7 +7,7 @@ require_once "./get_movie_info.php";
 try {
     $pdo = conectar();
     $user_id = (int) $_COOKIE["user_id"];
-
+    
     $query = "SELECT name, pic FROM users WHERE id = $user_id";
     $result = $pdo->query($query);
     $user = $result->fetch(PDO::FETCH_ASSOC);
@@ -16,11 +16,9 @@ try {
         header("Location: ../../index.html");
         exit();
     }
-
+    
     $username = htmlspecialchars($user["name"]);
-    $userpic = !empty($user["pic"])
-        ? htmlspecialchars($user["pic"])
-        : "../images/userdefault.png";
+    $userpic = !empty($user["pic"]) ? htmlspecialchars($user["pic"]) : "../images/userdefault.png";
 } catch (PDOException $e) {
     echo "Error de conexión: " . $e->getMessage();
     exit();
@@ -28,14 +26,38 @@ try {
 
 try {
     $pagina_actual = isset($_GET["pagina"]) ? (int) $_GET["pagina"] : 1;
-
     $peliculas_por_pagina = 30;
 
     $query = "SELECT m.id, m.title, m.date FROM movie m LIMIT $peliculas_por_pagina";
     $result = $pdo->query($query);
-
     $peliculas = $result->fetchAll(PDO::FETCH_ASSOC);
+
+    $check_query = "SELECT COUNT(*) as rec_count FROM recs WHERE user_id = $user_id";
+    $check_result = $pdo->query($check_query);
+    $rec_count = $check_result->fetch(PDO::FETCH_ASSOC)['rec_count'];
+    
+    if ($rec_count == 0) {
+        // Para evitar una ventana vacía, pondremos peliculas aleatorias a modo de sustitución
+        $query = "SELECT m.id, m.title, m.date FROM movie m ORDER BY RAND() LIMIT $peliculas_por_pagina";
+    } else {
+        // Las peliculas por recomendación
+        $query = "SELECT m.id, m.title, m.date 
+                 FROM movie m 
+                 JOIN recs r ON r.movie_id = m.id 
+                 WHERE r.user_id = $user_id 
+                 ORDER BY r.rec_score DESC 
+                 LIMIT $peliculas_por_pagina";
+    }
+    
+    $result = $pdo->query($query);
+    $peliculasrec = $result->fetchAll(PDO::FETCH_ASSOC);
+    
+    error_log("User ID: $user_id");
+    error_log("Recommendation count: $rec_count");
+    error_log("Returned movies: " . count($peliculasrec));
 } catch (PDOException $e) {
+    error_log("Recommendation query error: " . $e->getMessage());
+    $peliculasrec = [];
     echo "Error de conexión: " . $e->getMessage();
     exit();
 }
@@ -110,24 +132,31 @@ try {
         </section>
 
         <section>
-            <h2>Top Rated TV Shows</h2>
-            <div class="movie-grid">
-                <div class="movie-card">
-                    <img src="../images/placeholder.jpg" alt="TV Show 1">
-                    <h3>TV Show Title 1</h3>
-                    <p>Rating: 9.2/10</p>
+            <h2>Te recomendamos:</h2>
+            <div class="carousel-container">
+                <button class="carousel-btn left-btn">❮</button>
+                <div class="carousel">
+                    <?php foreach ($peliculasrec as $pelicula) { ?>
+                        <div class="movie-card" data-movie-id="<?php echo $pelicula[
+                            "id"
+                        ]; ?>" data-movie-title="<?php echo htmlspecialchars(
+                             $pelicula["title"]
+                         ); ?>">
+                            <a href="pelicula.php?pelicula=<?php echo $pelicula[
+                                "id"
+                            ]; ?>">
+                                <img src="../images/placeholder.jpg" alt="Loading...">
+                                <h3><?php echo htmlspecialchars(
+                                    $pelicula["title"]
+                                ); ?></h3>
+                            </a>
+                            <p> <?php echo htmlspecialchars(
+                                $pelicula["date"]
+                            ); ?> </p>
+                        </div>
+                    <?php } ?>
                 </div>
-                <div class="movie-card">
-                    <img src="../images/placeholder.jpg" alt="TV Show 2">
-                    <h3>TV Show Title 2</h3>
-                    <p>Rating: 8.8/10</p>
-                </div>
-                <div class="movie-card">
-                    <img src="../images/placeholder.jpg" alt="TV Show 3">
-                    <h3>TV Show Title 3</h3>
-                    <p>Rating: 9.0/10</p>
-                </div>
-
+                <button class="carousel-btn right-btn">❯</button>
             </div>
         </section>
     </main>

@@ -171,6 +171,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </form>
             </div>
         </div>
+        <script src="../js/dropdownLogout.js"></script>
     </main>
 </body>
 
