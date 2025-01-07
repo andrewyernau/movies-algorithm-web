@@ -434,6 +434,11 @@ INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstmisc.s
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\tex\latex\listings\listings.cfg
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\tex\latex\listings\listings.cfg
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\tex\latex\listings\listings.cfg
+INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\tex\latex\dirtree\dirtree.sty
+INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\tex\latex\dirtree\dirtree.sty
+INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\tex\generic\dirtree\dirtree.tex
+INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\tex\generic\dirtree\dirtree.tex
+INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\tex\generic\dirtree\dirtree.tex
 INPUT .\main.aux
 INPUT .\main.aux
 INPUT main.aux
@@ -544,6 +549,9 @@ INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\tex\latex\inconsolata\t1zi4.
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\tfm\public\inconsolata\t1-zi4r-0.tfm
 OUTPUT main.toc
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\inconsolata\i4-t1-0.enc
+INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbx12.tfm
+INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmri12.tfm
+INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbx12.tfm
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr8.tfm
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstlang1.sty
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstlang1.sty
@@ -606,10 +614,8 @@ INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\tfm\public\esint\esint
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\tfm\public\esint\esint10.tfm
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\tfm\public\esint\esint10.tfm
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr7.tfm
-INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbx12.tfm
+INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbx10.tfm
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\tfm\public\inconsolata\t1-zi4b-0.tfm
-INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbx12.tfm
-INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmri12.tfm
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\tex\latex\lm\ts1lmr.fd
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\tex\latex\lm\ts1lmr.fd
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\tex\latex\lm\ts1lmr.fd
@@ -661,6 +667,8 @@ INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\type1\public\inconsola
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\type1\public\inconsolata\Inconsolata-zi4r.pfb
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\euler\eufm10.pfb
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\euler\eufm10.pfb
+INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmbx10.pfb
+INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmbx10.pfb
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmbx12.pfb
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmbx12.pfb
 INPUT C:\Users\andrew\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmcsc10.pfb

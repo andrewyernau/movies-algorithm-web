@@ -21,7 +21,7 @@
 %\department{Department of Anything but Psychology}
 \title{Aplicaciones en Internet}
 \subtitle{Web de recomendación de películas}
-\author{\textit{Autores}\\\textsc{André Yermak Naumenko}\\ y \textsc{Álvaro Herández Riquelme}}
+\author{\textit{Autores}\\\textsc{Álvaro Herández Riquelme}\\ y \textsc{André Yermak Naumenko}}
 %\supervisor{Linus \textsc{Torvalds}}
 %\context{A long time ago in a galaxy far, far away...}
 \date{\today}
@@ -51,10 +51,26 @@
     \newpage
     \newpage
 
-    \chapter{Index}
-    \section{index.html}
-    \section{core.css}
+    \chapter{Introducción}
+    Este documento tiene como objetivo explicar el funcionamiento de la aplicación web de recomendación de películas llamada \texttt{El Recomendador}.
 
+    El proyecto incluye funcionalidades clave como la autenticación de usuarios, gestión de perfiles, un catálogo dinámico de películas, un sistema de puntuación y comentarios, y algoritmos avanzados para la recomendación y el ranking de películas. Además, se ha diseñado una interfaz intuitiva y una arquitectura robusta basada en PHP, JavaScript, MATLAB y SQL.
+
+    Cada capítulo abordará las distintas funcionalidades y aspectos técnicos del proyecto de forma sintética y clara para poder así comprender el funcionamiento al completo de la aplicación.
+    \chapter{Index}
+
+    En primera instancia, el usuario accederá a esta página. En ella, el usuario se puede encontrar una portada con una breve descripción de la web, y en ella va incluida dos formularios, una de registro y otra de inicio de sesión. Se ha optado por una portada simple y minimalista para que el usuario pueda acceder rápidamente a la web.
+    \section{index.html}
+
+    A nivel técnico, la página principal se compone de un formulario de inicio de sesión y un formulario de registro. Ambos formularios están diseñados como una extensión HTML del archivo \textit{index.html} de tal modo que son gestionadas por separado y se pueden encontrar en los directorios \textit{/auth/register.php y /auth/registerform.html} para el registro y \textit{/auth/login.php y /auth/loginform.html} para el inicio de sesión.
+
+    \textit{¿Por qué se ha optado por hacer eso?}
+
+    La razón principal es la posibilidad de implementar un formulario HTML pero que no esté visible al cargar la página, sino que se muestre al hacer clic en el botón correspondiente. La respuesta al botón se realiza mediante \textit{JavaScript}, pero la implementación de dos formulario, con mismo estilo que aparezca como respuesta a un \textit{script}, nos ha llevado a la llamada externa de dichos formularios y que se gestionen por separado en distintos documentos y además a la creación de un archivo de estilos llamado \textit{core.css}, que será un archivo con los estilos comunes a todas las páginas de la web.
+    \section{core.css}
+    En este archivo podemos encontrar la configuración común a todas las páginas de la web. En él se han definido los estilos de los formularios, las cabeceras, los pie de página, la fuente y el tamaño de la letra...
+
+    Todas las páginas de la web heredarán dichos archivos, y si en alguna página se quiere modificar algún estilo, se puede hacer de forma individual en el archivo de la página correspondiente.
 
     \chapter{Sección de la autenticación}
     \section{check\_session.php}
@@ -109,10 +125,12 @@
 
     \chapter{Otros}
     \section{README.md}
-
-    \end{document}
     \newpage
 
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % ------------------TODO LO QUE ESTÁ ABAJO HAY QUE ELIMINARLO LUEGO----------------------- %
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     Sleek Template is a minimal collection of \LaTeX{} packages and settings that ease the writing of beautiful documents. While originally meant for theses, it is perfectly suitable for project reports, articles, syntheses, etc. -- with a few adjustments, like margins.
 
     It is composed of four separate packages which can be used individually: \texttt{sleek}, \texttt{sleek-title}, \texttt{sleek-theorems} and \texttt{sleek-listings}.
