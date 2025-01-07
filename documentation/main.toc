@@ -2,58 +2,58 @@
 \contentsline {chapter}{\numberline {1}Introducción}{1}{chapter.1}%
 \contentsline {chapter}{\numberline {2}Index}{2}{chapter.2}%
 \contentsline {section}{\numberline {2.1}index.html}{2}{section.2.1}%
-\contentsline {section}{\numberline {2.2}core.css}{2}{section.2.2}%
-\contentsline {chapter}{\numberline {3}Sección de la autenticación}{3}{chapter.3}%
-\contentsline {section}{\numberline {3.1}check\_session.php}{3}{section.3.1}%
-\contentsline {section}{\numberline {3.2}loginform.html y registerform.html}{3}{section.3.2}%
-\contentsline {section}{\numberline {3.3}login.php}{3}{section.3.3}%
-\contentsline {section}{\numberline {3.4}logout.php}{3}{section.3.4}%
-\contentsline {section}{\numberline {3.5}register.php}{3}{section.3.5}%
-\contentsline {chapter}{\numberline {4}La carpeta Pages: las páginas visibles}{4}{chapter.4}%
-\contentsline {section}{\numberline {4.1}catalog.php}{4}{section.4.1}%
-\contentsline {section}{\numberline {4.2}edit\_profile.php}{4}{section.4.2}%
-\contentsline {section}{\numberline {4.3}get\_movie\_info.php}{4}{section.4.3}%
-\contentsline {section}{\numberline {4.4}main.php}{4}{section.4.4}%
-\contentsline {section}{\numberline {4.5}pelicula.php}{4}{section.4.5}%
-\contentsline {section}{\numberline {4.6}profile.php}{4}{section.4.6}%
-\contentsline {chapter}{\numberline {5}Uso de las peticiones GET y POST PHP}{5}{chapter.5}%
-\contentsline {section}{\numberline {5.1}cargar\_comentarios.php}{5}{section.5.1}%
-\contentsline {section}{\numberline {5.2}change\_profile.php}{5}{section.5.2}%
-\contentsline {section}{\numberline {5.3}check\_password.php}{5}{section.5.3}%
-\contentsline {section}{\numberline {5.4}crear\_comentario.php}{5}{section.5.4}%
-\contentsline {section}{\numberline {5.5}puntuar\_pelicula.php}{5}{section.5.5}%
-\contentsline {chapter}{\numberline {6}La base de datos}{6}{chapter.6}%
-\contentsline {section}{\numberline {6.1}ai0.sql}{6}{section.6.1}%
-\contentsline {chapter}{\numberline {7}Includes}{7}{chapter.7}%
-\contentsline {section}{\numberline {7.1}apiutils.php}{7}{section.7.1}%
-\contentsline {section}{\numberline {7.2}common.php}{7}{section.7.2}%
-\contentsline {section}{\numberline {7.3}conectar.php}{7}{section.7.3}%
-\contentsline {section}{\numberline {7.4}genres.php}{7}{section.7.4}%
-\contentsline {section}{\numberline {7.5}movies.php}{7}{section.7.5}%
-\contentsline {section}{\numberline {7.6}recommendation.php}{7}{section.7.6}%
-\contentsline {chapter}{\numberline {8}La carpeta Assets y javascript}{8}{chapter.8}%
-\contentsline {section}{\numberline {8.1}JS}{8}{section.8.1}%
-\contentsline {subsection}{\numberline {8.1.1}carousel.js}{8}{subsection.8.1.1}%
-\contentsline {subsection}{\numberline {8.1.2}dropdownLogout.js}{8}{subsection.8.1.2}%
-\contentsline {subsection}{\numberline {8.1.3}lazyload.js}{8}{subsection.8.1.3}%
-\contentsline {subsection}{\numberline {8.1.4}main.js}{8}{subsection.8.1.4}%
-\contentsline {chapter}{\numberline {9}Documentation}{9}{chapter.9}%
-\contentsline {section}{\numberline {9.1}main.tex}{9}{section.9.1}%
-\contentsline {chapter}{\numberline {10}Matlab y los algoritmos}{10}{chapter.10}%
-\contentsline {section}{\numberline {10.1}Conexión BBDD con Matlab}{10}{section.10.1}%
-\contentsline {section}{\numberline {10.2}main.m}{10}{section.10.2}%
-\contentsline {section}{\numberline {10.3}Algoritmo de recomendación}{10}{section.10.3}%
-\contentsline {section}{\numberline {10.4}Algoritmo de puntaje con Bayesian Ranking}{10}{section.10.4}%
-\contentsline {chapter}{\numberline {11}Otros}{11}{chapter.11}%
-\contentsline {section}{\numberline {11.1}README.md}{11}{section.11.1}%
-\contentsline {chapter}{\numberline {12}Features}{13}{chapter.12}%
-\contentsline {section}{\numberline {12.1}\texttt {sleek}}{13}{section.12.1}%
-\contentsline {subsection}{\numberline {12.1.1}Mathematics}{13}{subsection.12.1.1}%
-\contentsline {subsection}{\numberline {12.1.2}Units}{14}{subsection.12.1.2}%
-\contentsline {subsection}{\numberline {12.1.3}Lists}{15}{subsection.12.1.3}%
-\contentsline {subsection}{\numberline {12.1.4}Figures}{15}{subsection.12.1.4}%
-\contentsline {subsection}{\numberline {12.1.5}Tables}{16}{subsection.12.1.5}%
-\contentsline {section}{\numberline {12.2}\texttt {sleek-title}}{17}{section.12.2}%
-\contentsline {section}{\numberline {12.3}\texttt {sleek-theorems}}{18}{section.12.3}%
-\contentsline {section}{\numberline {12.4}\texttt {sleek-listings}}{19}{section.12.4}%
-\contentsline {chapter}{\numberline {A}Tables}{20}{appendix.A}%
+\contentsline {section}{\numberline {2.2}core.css}{3}{section.2.2}%
+\contentsline {chapter}{\numberline {3}Sección de la autenticación}{4}{chapter.3}%
+\contentsline {section}{\numberline {3.1}check\_session.php}{4}{section.3.1}%
+\contentsline {section}{\numberline {3.2}loginform.html y registerform.html}{4}{section.3.2}%
+\contentsline {section}{\numberline {3.3}login.php}{4}{section.3.3}%
+\contentsline {section}{\numberline {3.4}logout.php}{4}{section.3.4}%
+\contentsline {section}{\numberline {3.5}register.php}{4}{section.3.5}%
+\contentsline {chapter}{\numberline {4}La carpeta Pages: las páginas visibles}{5}{chapter.4}%
+\contentsline {section}{\numberline {4.1}catalog.php}{5}{section.4.1}%
+\contentsline {section}{\numberline {4.2}edit\_profile.php}{5}{section.4.2}%
+\contentsline {section}{\numberline {4.3}get\_movie\_info.php}{5}{section.4.3}%
+\contentsline {section}{\numberline {4.4}main.php}{5}{section.4.4}%
+\contentsline {section}{\numberline {4.5}pelicula.php}{5}{section.4.5}%
+\contentsline {section}{\numberline {4.6}profile.php}{5}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Uso de las peticiones GET y POST PHP}{6}{chapter.5}%
+\contentsline {section}{\numberline {5.1}cargar\_comentarios.php}{6}{section.5.1}%
+\contentsline {section}{\numberline {5.2}change\_profile.php}{6}{section.5.2}%
+\contentsline {section}{\numberline {5.3}check\_password.php}{6}{section.5.3}%
+\contentsline {section}{\numberline {5.4}crear\_comentario.php}{6}{section.5.4}%
+\contentsline {section}{\numberline {5.5}puntuar\_pelicula.php}{6}{section.5.5}%
+\contentsline {chapter}{\numberline {6}La base de datos}{7}{chapter.6}%
+\contentsline {section}{\numberline {6.1}ai0.sql}{7}{section.6.1}%
+\contentsline {chapter}{\numberline {7}Includes}{8}{chapter.7}%
+\contentsline {section}{\numberline {7.1}apiutils.php}{8}{section.7.1}%
+\contentsline {section}{\numberline {7.2}common.php}{8}{section.7.2}%
+\contentsline {section}{\numberline {7.3}conectar.php}{8}{section.7.3}%
+\contentsline {section}{\numberline {7.4}genres.php}{8}{section.7.4}%
+\contentsline {section}{\numberline {7.5}movies.php}{8}{section.7.5}%
+\contentsline {section}{\numberline {7.6}recommendation.php}{8}{section.7.6}%
+\contentsline {chapter}{\numberline {8}La carpeta Assets y javascript}{9}{chapter.8}%
+\contentsline {section}{\numberline {8.1}JS}{9}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}carousel.js}{9}{subsection.8.1.1}%
+\contentsline {subsection}{\numberline {8.1.2}dropdownLogout.js}{9}{subsection.8.1.2}%
+\contentsline {subsection}{\numberline {8.1.3}lazyload.js}{9}{subsection.8.1.3}%
+\contentsline {subsection}{\numberline {8.1.4}main.js}{9}{subsection.8.1.4}%
+\contentsline {chapter}{\numberline {9}Documentation}{10}{chapter.9}%
+\contentsline {section}{\numberline {9.1}main.tex}{10}{section.9.1}%
+\contentsline {chapter}{\numberline {10}Matlab y los algoritmos}{11}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Conexión BBDD con Matlab}{11}{section.10.1}%
+\contentsline {section}{\numberline {10.2}main.m}{11}{section.10.2}%
+\contentsline {section}{\numberline {10.3}Algoritmo de recomendación}{11}{section.10.3}%
+\contentsline {section}{\numberline {10.4}Algoritmo de puntaje con Bayesian Ranking}{11}{section.10.4}%
+\contentsline {chapter}{\numberline {11}Otros}{12}{chapter.11}%
+\contentsline {section}{\numberline {11.1}README.md}{12}{section.11.1}%
+\contentsline {chapter}{\numberline {12}Features}{14}{chapter.12}%
+\contentsline {section}{\numberline {12.1}\texttt {sleek}}{14}{section.12.1}%
+\contentsline {subsection}{\numberline {12.1.1}Mathematics}{14}{subsection.12.1.1}%
+\contentsline {subsection}{\numberline {12.1.2}Units}{15}{subsection.12.1.2}%
+\contentsline {subsection}{\numberline {12.1.3}Lists}{16}{subsection.12.1.3}%
+\contentsline {subsection}{\numberline {12.1.4}Figures}{16}{subsection.12.1.4}%
+\contentsline {subsection}{\numberline {12.1.5}Tables}{17}{subsection.12.1.5}%
+\contentsline {section}{\numberline {12.2}\texttt {sleek-title}}{18}{section.12.2}%
+\contentsline {section}{\numberline {12.3}\texttt {sleek-theorems}}{19}{section.12.3}%
+\contentsline {section}{\numberline {12.4}\texttt {sleek-listings}}{20}{section.12.4}%
+\contentsline {chapter}{\numberline {A}Tables}{22}{appendix.A}%

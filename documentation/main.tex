@@ -10,6 +10,9 @@
 \usepackage{packages/sleek-theorems}
 \usepackage{packages/sleek-listings}
 \usepackage{dirtree}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
 
 %%%%%%%%%%%%%%
 % Title-page %
@@ -64,6 +67,25 @@
 
     A nivel técnico, la página principal se compone de un formulario de inicio de sesión y un formulario de registro. Ambos formularios están diseñados como una extensión HTML del archivo \textit{index.html} de tal modo que son gestionadas por separado y se pueden encontrar en los directorios \textit{/auth/register.php y /auth/registerform.html} para el registro y \textit{/auth/login.php y /auth/loginform.html} para el inicio de sesión.
 
+    Para el fondo hemos elegido una animación discreta de una luz recorriendo la pantalla, esto se puede asemejar a los salvapantallas de los televisores con el logo DVD que cuando chocan con un borde, cambia su camino.
+
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \includegraphics[width=\textwidth]{resources/img/index.png}
+            \caption{Inicio de la web.}
+            \label{fig:index}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}{0.45\textwidth}
+            \includegraphics[width=\textwidth]{resources/img/salvapantallasdvd.png}
+            \caption{Inspiración del salvapantallas DVD.}
+            \label{fig:savescreen}
+        \end{subfigure}
+        \caption{Comparación entre el index de la web y el salvapantallas DVD.}
+        \label{fig:comparacion}
+    \end{figure}
+
     \textit{¿Por qué se ha optado por hacer eso?}
 
     La razón principal es la posibilidad de implementar un formulario HTML pero que no esté visible al cargar la página, sino que se muestre al hacer clic en el botón correspondiente. La respuesta al botón se realiza mediante \textit{JavaScript}, pero la implementación de dos formulario, con mismo estilo que aparezca como respuesta a un \textit{script}, nos ha llevado a la llamada externa de dichos formularios y que se gestionen por separado en distintos documentos y además a la creación de un archivo de estilos llamado \textit{core.css}, que será un archivo con los estilos comunes a todas las páginas de la web.
@@ -114,7 +136,7 @@
       \subsection{dropdownLogout.js}
       \subsection{lazyload.js}
       \subsection{main.js}
-      \chapter{Documentation}
+    \chapter{Documentation}
       \section{main.tex}
 
     \chapter{Matlab y los algoritmos}

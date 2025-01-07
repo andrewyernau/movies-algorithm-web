@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1736261362.94089 "main.bcf" "main.bbl" "main" 1736263954.00842 0
-  "./resources/bib/references.bib" 1736261362 342 db4ef233ae9ba846108dc93ec8f52507 ""
-  "main.bcf" 1736263953 108329 8c452c6b1b1c6e051466f97cc3fcad88 "pdflatex"
+["biber main"] 1736266639.93806 "main.bcf" "main.bbl" "main" 1736266648.51681 0
+  "./resources/bib/references.bib" 1736264329 516 22f47ba1dea03f2d086e17df2758c8f4 ""
+  "main.bcf" 1736266648 108469 47a973c3ce3aa0ce41f9d396a8f96097 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1736263950.96538 "d:/CodeProjects/movies-algorithm-web/documentation/main.tex" "main.pdf" "main" 1736263954.00917 0
+["pdflatex"] 1736266645.26032 "d:/CodeProjects/movies-algorithm-web/documentation/main.tex" "main.pdf" "main" 1736266648.51762 0
   "C:/Users/andrew/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1736250471 94776 c404d10ce5017594fb149aca8538c3d0 ""
   "C:/Users/andrew/AppData/Local/MiKTeX/fonts/pk/ljfour/public/esint/dpi720/esint10.pk" 1736113697 13864 6d6a8e422ef34820b8c084f62e73a004 ""
   "C:/Users/andrew/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1734955935 11989477 ad31e08f87d95a75318de63bd48fd38b ""
@@ -31,7 +31,6 @@
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/fonts/tfm/public/inconsolata/t1-zi4b-0.tfm" 1561076465 1348 c63c8e67bc566b012ebee8834571c199 ""
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/fonts/tfm/public/inconsolata/t1-zi4r-0.tfm" 1561076465 1328 8f7396ab15954094ca9576957bd516dd ""
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/fonts/tfm/public/inconsolata/ts1-zi4r.tfm" 1561076449 1244 1f88f6a5e4b8ccb8b031aa94d34557d3 ""
-  "C:/Users/andrew/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmbx10.tfm" 1256929440 12076 b54175e02101bea1addf6b2d0197ed12 ""
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmbx12.tfm" 1256929440 12088 d750ac78274fa7c9f73ba09914c04f8a ""
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmcsc10.tfm" 1256929440 11276 116dd5bea6621ce4a1999f96d876084c ""
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmr10.tfm" 1256929440 12056 7e13df7fe4cbce21b072ba7c4f4deb6e ""
@@ -81,7 +80,6 @@
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1247596673 34694 870c211f62cb72718a00e353f14f254d ""
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4b.pfb" 1557879859 80472 25e793b9d744a74acf1e26a28d2c0849 ""
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb" 1557879974 55526 866691d4af8dece5424ad744e8c0133d ""
-  "C:/Users/andrew/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb" 1256929440 121021 836464b5fe0c782d94085eb083550ccc ""
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb" 1256929440 116908 9a7a12d1e4df280ea0ab4aad83cdef88 ""
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb" 1256929440 116427 4909e80035dae5d5a4ec2b5ddd9649dd ""
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb" 1256929440 23055 2e5b42921de910eaa97b85df04ca4891 ""
@@ -338,16 +336,18 @@
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/tex/latex/zref/zref-abspage.sty" 1695383086 2269 4fe6fb3396214c91f164d45faf9bec45 ""
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/tex/latex/zref/zref-base.sty" 1695383086 20785 f7d1133a287929598a897c93f8f4c44b ""
-  "d:/CodeProjects/movies-algorithm-web/documentation/main.tex" 1736263947 26191 08e11975e852211835ab9c198a7ad9c3 ""
-  "main.aux" 1736263953 25633 e834623a790091661dfb530cf39e1c7f "pdflatex"
-  "main.bbl" 1736261364 486 76d65a242ec496c9b4361af646ff12cb "biber main"
-  "main.run.xml" 1736263953 2362 c26d79a887526895ce326534f853b481 "pdflatex"
-  "main.tex" 1736263947 26191 08e11975e852211835ab9c198a7ad9c3 ""
-  "main.toc" 1736263953 4476 3f4bb7e4a34194481bad6b2505040a92 "pdflatex"
+  "d:/CodeProjects/movies-algorithm-web/documentation/main.tex" 1736266625 27140 3d6991f7a16d6a3e38d79faf1b70180a ""
+  "main.aux" 1736266648 27048 1df62c520ac95d024619cba30592dc50 "pdflatex"
+  "main.bbl" 1736266641 4205 0d5bfaaeef8fb543a0334f099272a1d0 "biber main"
+  "main.run.xml" 1736266648 2362 21e9bec9f7abf6336427f8da47af57a8 "pdflatex"
+  "main.tex" 1736266625 27140 3d6991f7a16d6a3e38d79faf1b70180a ""
+  "main.toc" 1736266648 4478 ec897f73bc4f9334e24f56a216fc7dd3 "pdflatex"
   "packages/sleek-listings.sty" 1736102225 4121 a2fe6d1806e7661f7024df506e5a475c ""
   "packages/sleek-theorems.sty" 1736102225 3832 31696cf1d59747146a2f53eb2bb6cd9f ""
   "packages/sleek-title.sty" 1736102225 4144 4383b09b9327b196dcd25674bd37248d ""
   "packages/sleek.sty" 1736102225 4359 addf7b0e0e88f9c8ac42571079b9589a ""
+  "resources/img/index.png" 1736266401 94745 577c8d395c0b2db10f74ecb12772459d ""
+  "resources/img/salvapantallasdvd.png" 1736266352 75046 a32c4b970aaa926101a5191ee950f1c6 ""
   "resources/pdf/logo.pdf" 1734955869 14391 547192aba26d828f53bdccdbc434b8f2 ""
   (generated)
   "main.aux"
