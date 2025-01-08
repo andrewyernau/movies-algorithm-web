@@ -1,4 +1,4 @@
- // Lazy Loading: https://developer.mozilla.org/en-US/docs/Web/Performance/Lazy_loading
+ // Lazy Loading: https://nitropack.io/blog/post/javascript-lazy-loading
  document.addEventListener("DOMContentLoaded", () => {
     const lazyImages = document.querySelectorAll(".lazy-image");
 

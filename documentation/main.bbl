@@ -19,6 +19,64 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global/global}
+    \entry{carousel}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=3ea55c6971b673b2279b8381df63591d}{%
+           family={Docs},
+           familyi={D\bibinitperiod},
+           given={MDN\bibnamedelima Web},
+           giveni={M\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \strng{namehash}{3ea55c6971b673b2279b8381df63591d}
+      \strng{fullhash}{3ea55c6971b673b2279b8381df63591d}
+      \strng{fullhashraw}{3ea55c6971b673b2279b8381df63591d}
+      \strng{bibnamehash}{3ea55c6971b673b2279b8381df63591d}
+      \strng{authorbibnamehash}{3ea55c6971b673b2279b8381df63591d}
+      \strng{authornamehash}{3ea55c6971b673b2279b8381df63591d}
+      \strng{authorfullhash}{3ea55c6971b673b2279b8381df63591d}
+      \strng{authorfullhashraw}{3ea55c6971b673b2279b8381df63591d}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{\texttt{Intersection Observer API}}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+      \endverb
+      \verb{url}
+      \verb https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+      \endverb
+    \endentry
+    \entry{lazyloading}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=766f185211ba282268aec14199fe29cf}{%
+           family={Kaleev},
+           familyi={K\bibinitperiod},
+           given={Niko},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{766f185211ba282268aec14199fe29cf}
+      \strng{fullhash}{766f185211ba282268aec14199fe29cf}
+      \strng{fullhashraw}{766f185211ba282268aec14199fe29cf}
+      \strng{bibnamehash}{766f185211ba282268aec14199fe29cf}
+      \strng{authorbibnamehash}{766f185211ba282268aec14199fe29cf}
+      \strng{authornamehash}{766f185211ba282268aec14199fe29cf}
+      \strng{authorfullhash}{766f185211ba282268aec14199fe29cf}
+      \strng{authorfullhashraw}{766f185211ba282268aec14199fe29cf}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{\texttt{JavaScript Lazy Loading} --What It Is and How to Use It}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://nitropack.io/blog/post/javascript-lazy-loading
+      \endverb
+      \verb{url}
+      \verb https://nitropack.io/blog/post/javascript-lazy-loading
+      \endverb
+    \endentry
     \entry{overleaf}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=80d685e90fa23d7996a66e45aa2d24ad}{%
@@ -33,8 +91,8 @@
       \strng{authornamehash}{80d685e90fa23d7996a66e45aa2d24ad}
       \strng{authorfullhash}{80d685e90fa23d7996a66e45aa2d24ad}
       \strng{authorfullhashraw}{80d685e90fa23d7996a66e45aa2d24ad}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Learn \LaTeX{} in 30 minutes}
@@ -61,8 +119,8 @@
       \strng{authornamehash}{b835af205adc9f4cf7b438d1116ffb60}
       \strng{authorfullhash}{b835af205adc9f4cf7b438d1116ffb60}
       \strng{authorfullhashraw}{b835af205adc9f4cf7b438d1116ffb60}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{The comprehensive \LaTeX{} symbol list}
@@ -90,8 +148,8 @@
       \strng{authornamehash}{93c71fed62527d4c8c6ae13ee771fcdd}
       \strng{authorfullhash}{93c71fed62527d4c8c6ae13ee771fcdd}
       \strng{authorfullhashraw}{93c71fed62527d4c8c6ae13ee771fcdd}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{\texttt{siunitx} -- A comprehensive (SI) units package}

@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1736266639.93806 "main.bcf" "main.bbl" "main" 1736266648.51681 0
-  "./resources/bib/references.bib" 1736264329 516 22f47ba1dea03f2d086e17df2758c8f4 ""
-  "main.bcf" 1736266648 108469 47a973c3ce3aa0ce41f9d396a8f96097 "pdflatex"
+["biber main"] 1736371920.68078 "main.bcf" "main.bbl" "main" 1736373423.03947 0
+  "./resources/bib/references.bib" 1736371577 905 4f06f88a267059ed052103c54a6d40b7 ""
+  "main.bcf" 1736373422 108599 16d15a4cc0dab6df2abb852ef0106b2e "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1736266645.26032 "d:/CodeProjects/movies-algorithm-web/documentation/main.tex" "main.pdf" "main" 1736266648.51762 0
+["pdflatex"] 1736373418.54242 "d:/CodeProjects/movies-algorithm-web/documentation/main.tex" "main.pdf" "main" 1736373423.04025 0
   "C:/Users/andrew/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1736250471 94776 c404d10ce5017594fb149aca8538c3d0 ""
   "C:/Users/andrew/AppData/Local/MiKTeX/fonts/pk/ljfour/public/esint/dpi720/esint10.pk" 1736113697 13864 6d6a8e422ef34820b8c084f62e73a004 ""
   "C:/Users/andrew/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1734955935 11989477 ad31e08f87d95a75318de63bd48fd38b ""
@@ -336,17 +336,24 @@
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/tex/latex/zref/zref-abspage.sty" 1695383086 2269 4fe6fb3396214c91f164d45faf9bec45 ""
   "C:/Users/andrew/AppData/Local/Programs/MiKTeX/tex/latex/zref/zref-base.sty" 1695383086 20785 f7d1133a287929598a897c93f8f4c44b ""
-  "d:/CodeProjects/movies-algorithm-web/documentation/main.tex" 1736266625 27140 3d6991f7a16d6a3e38d79faf1b70180a ""
-  "main.aux" 1736266648 27048 1df62c520ac95d024619cba30592dc50 "pdflatex"
-  "main.bbl" 1736266641 4205 0d5bfaaeef8fb543a0334f099272a1d0 "biber main"
-  "main.run.xml" 1736266648 2362 21e9bec9f7abf6336427f8da47af57a8 "pdflatex"
-  "main.tex" 1736266625 27140 3d6991f7a16d6a3e38d79faf1b70180a ""
-  "main.toc" 1736266648 4478 ec897f73bc4f9334e24f56a216fc7dd3 "pdflatex"
+  "d:/CodeProjects/movies-algorithm-web/documentation/main.tex" 1736373417 32184 c4ac7e0458f47303c5e89c803cd5405e ""
+  "main.aux" 1736373422 25012 e72ae0f8072be04cce9e774dba45b723 "pdflatex"
+  "main.bbl" 1736371922 6775 ea7055d5faa3b57fab011b447b1ee2d8 "biber main"
+  "main.run.xml" 1736373422 2362 21e9bec9f7abf6336427f8da47af57a8 "pdflatex"
+  "main.tex" 1736373417 32184 c4ac7e0458f47303c5e89c803cd5405e ""
+  "main.toc" 1736373422 3599 2b0faf5554c46c44be7fbe1bb49f009a "pdflatex"
   "packages/sleek-listings.sty" 1736102225 4121 a2fe6d1806e7661f7024df506e5a475c ""
   "packages/sleek-theorems.sty" 1736102225 3832 31696cf1d59747146a2f53eb2bb6cd9f ""
   "packages/sleek-title.sty" 1736102225 4144 4383b09b9327b196dcd25674bd37248d ""
   "packages/sleek.sty" 1736102225 4359 addf7b0e0e88f9c8ac42571079b9589a ""
+  "resources/img/catalog.png" 1736373137 835017 60e041e1e881ae73fda65f633c17119f ""
+  "resources/img/edit_profile.png" 1736373185 245777 947f2a0b51ee277928a340bec0fdcdea ""
+  "resources/img/footer.png" 1736267345 22459 1ce271d390a6a4213e2996d42b79681e ""
+  "resources/img/header.png" 1736267324 56457 377b5fdcf2a9d62b6a34a5414bb8170b ""
   "resources/img/index.png" 1736266401 94745 577c8d395c0b2db10f74ecb12772459d ""
+  "resources/img/main.png" 1736372674 1105891 219d892d53434ecaa30ab47afb504d0b ""
+  "resources/img/movie.png" 1736373227 467562 5c6e4d50559cdcc9497f2946a5acf17e ""
+  "resources/img/profile.png" 1736373161 236708 d14b8b4b090e91289e3b8fd2be9c3498 ""
   "resources/img/salvapantallasdvd.png" 1736266352 75046 a32c4b970aaa926101a5191ee950f1c6 ""
   "resources/pdf/logo.pdf" 1734955869 14391 547192aba26d828f53bdccdbc434b8f2 ""
   (generated)
